@@ -21,6 +21,7 @@ db/all: db/wbdhu4
 # NHD Feature Code (FCode) mappings; fetch it from the smallest available
 # source
 db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
+	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-f PGDump \
@@ -30,6 +31,7 @@ db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
 
 # NHD flow network
 db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
+	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
@@ -43,6 +45,7 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # NHDPlus Value Added Attributes (for navigating the flow network, etc.)
 db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
+	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
@@ -56,6 +59,7 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # watershed boundaries for 4-digit hydrologic units
 db/wbdhu4: data/WBD_National_GDB.zip db/postgis
+	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-lco GEOMETRY_NAME=geom \
