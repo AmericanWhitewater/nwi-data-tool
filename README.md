@@ -1,5 +1,21 @@
 # NWI Data Tool
 
+## Setup
+
+### MacOS
+
+This will install Node.js, GDAL, and PostgreSQL with PostGIS:
+
+```bash
+$ brew bundle
+```
+
+This will install Node.js dependencies:
+
+```bash
+$ npm install
+```
+
 ## Data Preparation
 
 1. Obtain and load AW `reaches` table
