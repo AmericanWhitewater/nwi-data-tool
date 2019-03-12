@@ -3,7 +3,8 @@ include init.mk
 
 default: db/all
 
-.PHONY: DATABASE_URL db db/postgis db/all
+# these targets don't produce files; always run them
+.PHONY: DATABASE_URL db db/postgis db/all db/nhdfcode db/nhdflowline_% db/nhdplusflowlinevaa_%
 
 DATABASE_URL:
   @test "${$@}" || (echo "$@ is undefined" && false)
@@ -66,7 +67,8 @@ db/wbdhu4: data/WBD_National_GDB.zip db/postgis
 
 ### Datasets
 
-.PRECIOUS: data/NHDPLUS_H_%_HU4_GDB.zip 
+# don't delete these; they're large enough that re-downloading them is annoying
+.PRECIOUS: data/NHDPLUS_H_%_HU4_GDB.zip
 
 data/NHDPLUS_H_%_HU4_GDB.zip:
   $(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU4/HighResolution/GDB/$(subst data/,,$@))
