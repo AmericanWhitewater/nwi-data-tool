@@ -1,3 +1,3 @@
-install gdal
-install postgis
-install node
+brew "gdal"
+brew "postgis"
+brew "node"
