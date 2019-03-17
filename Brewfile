@@ -1,3 +1,5 @@
 brew "gdal"
+brew "gettext"
 brew "postgis"
+brew "pv"
 brew "node"
