@@ -89,13 +89,13 @@ SELECT
 FROM snapped
 JOIN points USING (reach_id)
 ON CONFLICT (reach_id) DO UPDATE
-  SET
-    huc4 = EXCLUDED.huc4,
-    nhdplusid = EXCLUDED.nhdplusid,
-    fdate = EXCLUDED.fdate,
-    candidates = EXCLUDED.candidates,
-    distance = EXCLUDED.distance,
-    geom = EXCLUDED.geom,
-    flowline_point = EXCLUDED.flowline_point,
-    original_point = EXCLUDED.original_point,
-    link = EXCLUDED.link;
+SET
+  huc4 = EXCLUDED.huc4,
+  nhdplusid = EXCLUDED.nhdplusid,
+  fdate = EXCLUDED.fdate,
+  candidates = EXCLUDED.candidates,
+  distance = EXCLUDED.distance,
+  geom = EXCLUDED.geom,
+  flowline_point = EXCLUDED.flowline_point,
+  original_point = EXCLUDED.original_point,
+  link = EXCLUDED.link;

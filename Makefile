@@ -119,6 +119,9 @@ db/snapped_takeouts_%: db/flowline db/snapped_takeouts db/nhdarea_% \
 	HU4=$(subst db/snapped_takeouts_,,$@) envsubst < sql/actions/snap_takeouts.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1
 
+db/correct_putins: db/snapped_putins db/snapped_takeouts
+	psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
+
 # process a specific 4-digit hydrologic unit
 wbd/%: db/snapped_putins_% db/snapped_takeouts_%
 	@echo "Reaches for hydrologic unit $(subst wbd/,,$@) processed."

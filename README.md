@@ -36,19 +36,25 @@ $ npm install
    `fdate`, number of candidate flowlines, point on closest flowline, point
    on associated polygon, original point, and link from original to snapped
    location.
+9. Adjust put-in locations for reaches immediately downstream from other
+   reaches so that they match the upstream reach's take-out location.
+   (Take-outs are snapped to downstream NHD segments using put-in
+   information.)
 
 Steps 2-8 can be executed for a given HU4 (e.g. `1709`) using:
 
 ```bash
-make -j $(nproc) wbd/1709
+$ make -j $(nproc) wbd/1709
+```
+
+Step 9 can be repeated as necessary:
+
+```bash
+$ make db/correct_putins
 ```
 
 ### TODO
 
-* If original put-in point matches the original take-out point of an upstream
-  section (or is within ~25m) but they snapped differently, the snapped
-  take-out is more likely to be correct, so it should be corrected. E.g.
-  reaches `3447` and `3448` in HU4 `1709`.
 * Check indexes, specifically `permanent_identifier` on `nhdwaterbody` and
   `nhdarea`
 * Report generation, e.g. # of points that didn't snap per watershed, distance
