@@ -1,0 +1,1 @@
+CREATE INDEX nhdwaterbody_${HU4}_permanent_identifier_idx ON nhdwaterbody_${HU4}(permanent_identifier);

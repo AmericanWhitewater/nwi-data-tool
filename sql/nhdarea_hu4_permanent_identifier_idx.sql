@@ -1,0 +1,1 @@
+CREATE INDEX nhdarea_${HU4}_permanent_identifier_idx ON nhdarea_${HU4}(permanent_identifier);

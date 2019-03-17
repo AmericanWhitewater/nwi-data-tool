@@ -55,7 +55,5 @@ $ make db/correct_putins
 
 ### TODO
 
-* Check indexes, specifically `permanent_identifier` on `nhdwaterbody` and
-  `nhdarea`
 * Report generation, e.g. # of points that didn't snap per watershed, distance
   breakdowns

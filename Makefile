@@ -108,16 +108,28 @@ db/reaches_%: db/wbdhu4
 # snapped put-ins for a particular 4-digit hydrologic unit
 db/snapped_putins_%: db/flowline db/snapped_putins db/nhdarea_% \
 										 db/nhdflowline_% db/nhdplusflowlinevaa_% \
-									   db/nhdwaterbody_% db/reaches_%
+									   db/nhdwaterbody_% db/reaches_% \
+										 db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
 	HU4=$(subst db/snapped_putins_,,$@) envsubst < sql/actions/snap_putins.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1
 
 # snapped take-outs for a particular 4-digit hydrologic unit
 db/snapped_takeouts_%: db/flowline db/snapped_takeouts db/nhdarea_% \
 											 db/nhdflowline_% db/nhdplusflowlinevaa_% \
-										   db/nhdwaterbody_% db/reaches_% db/snapped_putins_%
+										   db/nhdwaterbody_% db/reaches_% db/snapped_putins_% \
+										   db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
 	HU4=$(subst db/snapped_takeouts_,,$@) envsubst < sql/actions/snap_takeouts.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1
+
+db/indexes/nhdarea_%: db/nhdarea_%
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(subst db/,,$@)_permanent_identifier_idx" > /dev/null 2>&1 || \
+		HU4=$(subst db/indexes/nhdarea_,,$@) envsubst < sql/nhdarea_hu4_permanent_identifier_idx.sql | \
+		psql -v ON_ERROR_STOP=1 -qX1
+
+db/indexes/nhdwaterbody_%: db/nhdwaterbody_%
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(subst db/,,$@)_permanent_identifier_idx" > /dev/null 2>&1 || \
+		HU4=$(subst db/indexes/nhwaterbody_,,$@) envsubst < sql/nhdwaterbody_hu4_permanent_identifier_idx.sql | \
+		psql -v ON_ERROR_STOP=1 -qX1
 
 db/correct_putins: db/snapped_putins db/snapped_takeouts
 	psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
