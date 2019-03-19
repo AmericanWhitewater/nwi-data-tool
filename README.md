@@ -17,16 +17,16 @@ brew bundle
 npm install
 ```
 
-3. Enable `direnv` (to set environment variables and to update `PATH`):
-
-```bash
-direnv allow
-```
-
-4. Copy `sample.env` to `.env` (and update it if necessary):
+3. Copy `sample.env` to `.env` (and update it if necessary):
 
 ```bash
 cp sample.env .env
+```
+
+4. Enable `direnv` (to set environment variables and to update `PATH`):
+
+```bash
+direnv allow
 ```
 
 ## Data Preparation
