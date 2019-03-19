@@ -28,3 +28,7 @@ db/$(strip $(1)): db
 endef
 
 $(foreach fn,$(shell ls sql/ 2> /dev/null | sed 's/\..*//'),$(eval $(call register_relation_target,$(fn))))
+
+define extname
+	$(subst .,,$(suffix $(1)))
+endef

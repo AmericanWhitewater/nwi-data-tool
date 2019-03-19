@@ -22,13 +22,14 @@ db/all: db/wbdhu4
 
 # NHD water body polygons (rivers)
 db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
-		-nln $(subst db/,,$@) \
+		-nln $(relation) \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -37,23 +38,25 @@ db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 # NHD Feature Code (FCode) mappings; fetch it from the smallest available
 # source
 db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
-	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
-		nhdfcode | pv | psql -v ON_ERROR_STOP=1 -qX
+		$(relation) | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # NHD flow network
 db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
-		-nln $(subst db/,,$@) \
+		-nln $(relation) \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -61,13 +64,14 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # NHDPlus Value Added Attributes (for navigating the flow network, etc.)
 db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
-		-nln $(subst db/,,$@) \
+		-nln $(relation) \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -75,13 +79,14 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # NHD water body polygons (lakes, etc.)
 db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
-		-nln $(subst db/,,$@) \
+		-nln $(relation) \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -89,7 +94,8 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # watershed boundaries for 4-digit hydrologic units
 db/wbdhu4: data/WBD_National_GDB.zip db/postgis
-	@psql -c "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
 		-lco GEOMETRY_NAME=geom \
@@ -97,45 +103,88 @@ db/wbdhu4: data/WBD_National_GDB.zip db/postgis
 		-f PGDump \
 		/vsistdout/ \
 		$< \
-		$(subst db/,,$@) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
+		$(relation) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # reaches for a particular 4-digit hydrologic unit
-db/reaches_%: db/wbdhu4
-	@psql -v ON_ERROR_STOP=1 -qXc "\d $(subst db/,,$@)" > /dev/null 2>&1 || \
-	  HU4=$(subst db/reaches_,,$@) envsubst < sql/reaches_hu4.sql | \
+db/reaches.%: sql/reaches_hu4.sql db/wbdhu4
+	$(eval hu4 := $(strip $(call extname,$@)))
+	$(eval relation := $(notdir $(basename $@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+	  HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -qX1
 
 # snapped put-ins for a particular 4-digit hydrologic unit
-db/snapped_putins_%: db/flowline db/snapped_putins db/nhdarea_% \
+db/snapped_putins.%: sql/actions/snap_putins.sql \
+										 db/flowline db/snapped_putins db/nhdarea_% \
 										 db/nhdflowline_% db/nhdplusflowlinevaa_% \
-									   db/nhdwaterbody_% db/reaches_% \
+									   db/nhdwaterbody_% db/reaches.% \
 										 db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
-	HU4=$(subst db/snapped_putins_,,$@) envsubst < sql/actions/snap_putins.sql | \
-	  psql -v ON_ERROR_STOP=1 -qX1
+	$(eval hu4 := $(strip $(call extname,$@)))
+	HU4=$(hu4) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -X1
 
 # snapped take-outs for a particular 4-digit hydrologic unit
-db/snapped_takeouts_%: db/flowline db/snapped_takeouts db/nhdarea_% \
+db/snapped_takeouts.%: sql/actions/snap_takeouts.sql \
+											 db/flowline db/snapped_takeouts db/nhdarea_% \
 											 db/nhdflowline_% db/nhdplusflowlinevaa_% \
-										   db/nhdwaterbody_% db/reaches_% db/snapped_putins_% \
+										   db/nhdwaterbody_% db/reaches.% db/snapped_putins.% \
 										   db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
-	HU4=$(subst db/snapped_takeouts_,,$@) envsubst < sql/actions/snap_takeouts.sql | \
-	  psql -v ON_ERROR_STOP=1 -qX1
+	$(eval hu4 := $(strip $(call extname,$@)))
+	HU4=$(hu4) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -X1
 
-db/indexes/nhdarea_%: db/nhdarea_%
-	@psql -v ON_ERROR_STOP=1 -qXc "\d $(subst db/,,$@)_permanent_identifier_idx" > /dev/null 2>&1 || \
-		HU4=$(subst db/indexes/nhdarea_,,$@) envsubst < sql/nhdarea_hu4_permanent_identifier_idx.sql | \
+db/indexes/nhdarea_permanent_identifier_idx.%: sql/nhdarea_hu4_permanent_identifier_idx.sql db/nhdarea_%
+	$(eval relation := $(notdir $(basename $@)))
+	$(eval hu4 := $(strip $(call extname,$@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+		HU4=$(hu4) envsubst < $< | \
 		psql -v ON_ERROR_STOP=1 -qX1
 
-db/indexes/nhdwaterbody_%: db/nhdwaterbody_%
-	@psql -v ON_ERROR_STOP=1 -qXc "\d $(subst db/,,$@)_permanent_identifier_idx" > /dev/null 2>&1 || \
-		HU4=$(subst db/indexes/nhwaterbody_,,$@) envsubst < sql/nhdwaterbody_hu4_permanent_identifier_idx.sql | \
+db/indexes/nhdarea_%: db/indexes/nhdarea_permanent_identifier_idx.%
+	@true
+
+db/indexes/nhdflowline_nhdplusid_idx.%: sql/nhdflowline_hu4_nhdplusid_idx.sql db/nhdflowline_%
+	$(eval relation := $(notdir $(basename $@)))
+	$(eval hu4 := $(strip $(call extname,$@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+		HU4=$(hu4) envsubst < $< | \
 		psql -v ON_ERROR_STOP=1 -qX1
+
+db/indexes/nhdflowline_%: db/indexes/nhdflowline_nhdplusid_idx.%
+	@true
+
+db/indexes/nhdplusflowlinevaa_hydroseq_idx.%: sql/nhdplusflowlinevaa_hu4_hydroseq_idx.sql db/nhdplusflowlinevaa_%
+	$(eval relation := $(notdir $(basename $@)))
+	$(eval hu4 := $(strip $(call extname,$@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+		HU4=$(hu4) envsubst < $< | \
+		psql -v ON_ERROR_STOP=1 -qX1
+
+db/indexes/nhdplusflowlinevaa_nhdplusid_idx.%: sql/nhdplusflowlinevaa_hu4_nhdplusid_idx.sql db/nhdplusflowlinevaa_%
+	$(eval relation := $(notdir $(basename $@)))
+	$(eval hu4 := $(strip $(call extname,$@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+		HU4=$(hu4) envsubst < $< | \
+		psql -v ON_ERROR_STOP=1 -qX1
+
+db/indexes/nhdplusflowlinevaa_%: db/indexes/nhdplusflowlinevaa_hydroseq_idx.% db/indexes/nhdplusflowlinevaa_nhdplusid_idx.%
+	@true
+
+db/indexes/nhdwaterbody_permanent_identifier_idx.%: sql/nhdwaterbody_hu4_permanent_identifier_idx.sql db/nhdwaterbody_%
+	$(eval relation := $(notdir $(basename $@)))
+	$(eval hu4 := $(strip $(call extname,$@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+		HU4=$(hu4) envsubst < $< | \
+		psql -v ON_ERROR_STOP=1 -qX1
+
+db/indexes/nhdwaterbody_%: db/indexes/nhdwaterbody_permanent_identifier_idx.%
+	@true
 
 db/correct_putins: db/snapped_putins db/snapped_takeouts
 	psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
 
 # process a specific 4-digit hydrologic unit
-wbd/%: db/snapped_putins_% db/snapped_takeouts_%
+wbd/%: db/snapped_putins.% db/snapped_takeouts.%
 	@echo "Reaches for hydrologic unit $(subst wbd/,,$@) processed."
 	@mkdir -p $$(dirname $@)
 	@touch $@

@@ -1,0 +1,1 @@
+CREATE INDEX nhdplusflowlinevaa_nhdplusid_idx_${HU4} ON nhdplusflowlinevaa_${HU4} (nhdplusid);
