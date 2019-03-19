@@ -8,65 +8,80 @@
 `envsubst`), and PostgreSQL with PostGIS:
 
 ```bash
-$ brew bundle
+brew bundle
 ```
 
 2. Install Node.js dependencies:
 
 ```bash
-$ npm install
+npm install
 ```
 
 3. Enable `direnv` (to set environment variables and to update `PATH`):
 
 ```bash
-$ direnv allow
+direnv allow
 ```
 
 4. Copy `sample.env` to `.env` (and update it if necessary):
 
 ```bash
-$ cp sample.env .env
+cp sample.env .env
 ```
 
 ## Data Preparation
 
-1. Obtain and load AW `reaches` table
-2. Load [Watershed Boundary Dataset
-   (WBD)](https://www.usgs.gov/core-science-systems/ngp/national-hydrography/watershed-boundary-dataset)
-   4-digit hydrologic units
-3. Pick a 4-digit hydrologic unit from [the WBD Subregions Map](https://www.usgs.gov/media/images/watershed-boundary-dataset-subregions-map), e.g. `1709` (the Willamette).
-4. Create an HU4 `reaches` table by intersecting WBD with `reaches` to filter
-   for access points in that HU4
-5. Download and import `nhdflowline` `nhdarea`, `nhdwaterbody`, and
-   `nhdplusflowlinevaa` for the selected 4-digit hydrologic unit.
-6. Import `nhdfcode` (if not already imported).
-7. Create snapped reach put-ins (`snapped_putins`) with `nhdplusid`, `fdate`,
-   number of candidate flowlines, point on closest flowline, point on
-   associated polygon, original point, and link from original to snapped
-   location.
-8. Create snapped reach take-outs (`snapped_takeouts`) with `nhdplusid`,
-   `fdate`, number of candidate flowlines, point on closest flowline, point
-   on associated polygon, original point, and link from original to snapped
-   location.
-9. Adjust put-in locations for reaches immediately downstream from other
-   reaches so that they match the upstream reach's take-out location.
-   (Take-outs are snapped to downstream NHD segments using put-in
-   information.)
+ 1. Obtain and load AW `reaches` table
+ 2. Load [Watershed Boundary Dataset
+    (WBD)](https://www.usgs.gov/core-science-systems/ngp/national-hydrography/watershed-boundary-dataset)
+    4-digit hydrologic units
+ 3. Pick a 4-digit hydrologic unit from [the WBD Subregions Map](https://www.usgs.gov/media/images/watershed-boundary-dataset-subregions-map), e.g. `1709` (the Willamette).
+ 4. Create an HU4 `reaches` table by intersecting WBD with `reaches` to filter
+    for access points in that HU4
+ 5. Download and import `nhdflowline` `nhdarea`, `nhdwaterbody`, and
+    `nhdplusflowlinevaa` for the selected 4-digit hydrologic unit.
+ 6. Import `nhdfcode` (if not already imported).
+ 7. Create snapped reach put-ins (`snapped_putins`) with `nhdplusid`, `fdate`,
+    number of candidate flowlines, point on closest flowline, point on
+    associated polygon, original point, and link from original to snapped
+    location.
+ 8. Create snapped reach take-outs (`snapped_takeouts`) with `nhdplusid`,
+    `fdate`, number of candidate flowlines, point on closest flowline, point
+    on associated polygon, original point, and link from original to snapped
+    location.
+ 9. Adjust put-in locations for reaches immediately downstream from other
+    reaches so that they match the upstream reach's take-out location.
+    (Take-outs are snapped to downstream NHD segments using put-in
+    information.)
+10. Stitch linework together between put-ins and take-outs to form
+    `reach_segments`.
 
 Steps 2-8 can be executed for a given HU4 (e.g. `1709`) using:
 
 ```bash
-$ make -j $(nproc) wbd/1709
+make -j $(nproc) wbd/1709
 ```
+
+This will download upwards of 3GB of data from USGS.
 
 Step 9 can be repeated as necessary:
 
 ```bash
-$ make db/correct_putins
+make db/correct_putins
+```
+
+Step 10:
+
+```bash
+make db/reach_segments.1712
 ```
 
 ### TODO
 
 * Report generation, e.g. # of points that didn't snap per watershed, distance
   breakdowns
+* Identify reaches where the put-in / take-out flowline point is **NOT** on the
+  generated reach segment (this will identify incomplete reach segments,
+  potentially due to swapped put-in / take-out locations)
+* Identify reaches where the put-in is downstream of the take-out (e.g. 10559
+  [0107]); these can be handled by flipped put-in and take-out `nhdplusid`s

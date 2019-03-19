@@ -133,6 +133,13 @@ db/snapped_takeouts.%: sql/actions/snap_takeouts.sql \
 	HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -X1
 
+db/reach_segments.%: sql/actions/generate_segments.sql db/reach_segments \
+										 db/indexes/nhdflowline_% db/indexes/nhdplusflowlinevaa_% \
+										 db/snapped_putins db/snapped_takeouts
+	$(eval hu4 := $(strip $(call extname,$@)))
+	HU4=$(hu4) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -X1
+
 db/indexes/nhdarea_permanent_identifier_idx.%: sql/nhdarea_hu4_permanent_identifier_idx.sql db/nhdarea_%
 	$(eval relation := $(notdir $(basename $@)))
 	$(eval hu4 := $(strip $(call extname,$@)))
