@@ -62,7 +62,8 @@ Steps 2-8 can be executed for a given HU4 (e.g. `1709`) using:
 make -j $(nproc) wbd/1709
 ```
 
-This will download upwards of 3GB of data from USGS.
+This will download 3GB or more of data from USGS, depending on the hydrologic
+units processed.
 
 Step 9 can be repeated as necessary:
 
@@ -73,7 +74,7 @@ make db/correct_putins
 Step 10:
 
 ```bash
-make db/reach_segments.1712
+make db/reach_segments.1709
 ```
 
 ### Questionable Reach Segments
