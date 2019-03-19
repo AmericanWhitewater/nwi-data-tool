@@ -76,12 +76,14 @@ Step 10:
 make db/reach_segments.1712
 ```
 
+### Questionable Reach Segments
+
+Questionable reach segments (i.e. where the segment is something other than a
+LineString, where snapped flowline points are **not** on the generated
+segment, or where snapped put-ins are downstream of take-outs) are marked
+using the `questionable` column on `reach_segments`.
+
 ### TODO
 
 * Report generation, e.g. # of points that didn't snap per watershed, distance
   breakdowns
-* Identify reaches where the put-in / take-out flowline point is **NOT** on the
-  generated reach segment (this will identify incomplete reach segments,
-  potentially due to swapped put-in / take-out locations)
-* Identify reaches where the put-in is downstream of the take-out (e.g. 10559
-  [0107]); these can be handled by flipped put-in and take-out `nhdplusid`s

@@ -11,8 +11,6 @@ INSERT INTO reach_segments
     WHERE p.huc4 = '${HU4}'
       AND p.flowline_point IS NOT NULL
       AND t.flowline_point IS NOT NULL
-      -- problematic reaches
-      AND reach_id NOT IN (2727) -- HUC4 1709
     ORDER BY reach_id
   ),
   segments AS (
@@ -31,6 +29,7 @@ INSERT INTO reach_segments
             FROM nhdflowline_${HU4} nhdflowline
             JOIN nhdplusflowlinevaa_${HU4} nhdplusflowlinevaa USING (nhdplusid)
             WHERE nhdplusid = putin_nhdplusid
+              AND fcode NOT IN (56600) -- coastline
               -- put-in and take-out are the same point (642)
               AND NOT ST_Equals(putin_geom, takeout_geom)
           UNION ALL
@@ -47,6 +46,7 @@ INSERT INTO reach_segments
             JOIN nhdplusflowlinevaa_${HU4} nhdplusflowlinevaa USING (nhdplusid)
             JOIN flowlines ON nhdplusflowlinevaa.hydroseq = flowlines.downstream
             WHERE NOT takeout
+              AND fcode NOT IN (56600) -- coastline
         ),
         -- merge consecutive flowlines together
         -- TODO accumulate in recursive stage of ^^
@@ -86,14 +86,24 @@ INSERT INTO reach_segments
             geom,
             -- line_locate_point: 1st arg isn't a line
             -- 2727 produces a MultiLineString
-            ST_LineLocatePoint(
-              geom,
-              putin_geom
-            ) putin_loc,
-            ST_LineLocatePoint(
-              geom,
-              takeout_geom
-            ) takeout_loc
+            CASE
+            WHEN GeometryType(geom) = 'LINESTRING' THEN
+              ST_LineLocatePoint(
+                geom,
+                putin_geom
+              )
+            ELSE 0.0
+            END putin_loc,
+            CASE
+            WHEN GeometryType(geom) = 'LINESTRING' THEN
+              ST_LineLocatePoint(
+                geom,
+                takeout_geom
+              )
+            ELSE 1.0
+            END takeout_loc,
+            -- geometries other than LineStrings are questionable
+            GeometryType(geom) != 'LINESTRING' questionable
           FROM merged
         )
         SELECT
@@ -108,7 +118,9 @@ INSERT INTO reach_segments
               -- 0107)
               least(putin_loc, takeout_loc),
               greatest(putin_loc, takeout_loc)
-            )
+            ),
+            -- put-ins downstream of take-outs are questionable
+            questionable OR putin_loc > takeout_loc
           )::segment segment
         FROM locations
       )
@@ -117,10 +129,15 @@ INSERT INTO reach_segments
   SELECT
     reach_id,
     (segment).nhdplusids,
+    (segment).questionable
+      -- put-ins or take-outs not on the generated segment are questionable
+      OR NOT ST_DWithin((segment).geom::geography, putin_geom::geography, 1)
+      OR NOT ST_DWithin((segment).geom::geography, takeout_geom::geography, 1),
     (segment).geom
   FROM segments
-  WHERE GeometryType((segment).geom) = 'LINESTRING'
+  JOIN snapped_reaches USING (reach_id)
   ON CONFLICT (reach_id) DO UPDATE
   SET
     nhdplusids = EXCLUDED.nhdplusids,
+    questionable = EXCLUDED.questionable,
     geom = EXCLUDED.geom;
