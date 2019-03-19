@@ -1,3 +1,4 @@
+brew "direnv"
 brew "gdal"
 brew "gettext"
 brew "postgis"

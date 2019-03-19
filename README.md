@@ -4,16 +4,29 @@
 
 ### MacOS
 
-This will install Node.js, GDAL, and PostgreSQL with PostGIS:
+1. Install [`direnv`](https://direnv.net/), Node.js, GDAL, gettext (for
+`envsubst`), and PostgreSQL with PostGIS:
 
 ```bash
 $ brew bundle
 ```
 
-This will install Node.js dependencies:
+2. Install Node.js dependencies:
 
 ```bash
 $ npm install
+```
+
+3. Enable `direnv` (to set environment variables and to update `PATH`):
+
+```bash
+$ direnv allow
+```
+
+4. Copy `sample.env` to `.env` (and update it if necessary):
+
+```bash
+$ cp sample.env .env
 ```
 
 ## Data Preparation
