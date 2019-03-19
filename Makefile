@@ -190,6 +190,9 @@ db/indexes/nhdwaterbody_%: db/indexes/nhdwaterbody_permanent_identifier_idx.%
 db/correct_putins: db/snapped_putins db/snapped_takeouts
 	psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
 
+db/flowline: db/postgis
+	$(call create_relation)
+
 # process a specific 4-digit hydrologic unit
 wbd/%: db/snapped_putins.% db/snapped_takeouts.%
 	@echo "Reaches for hydrologic unit $(subst wbd/,,$@) processed."
