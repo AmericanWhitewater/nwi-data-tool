@@ -36,11 +36,12 @@ INSERT INTO reach_segments
             -- stop at the takeout
             SELECT
               idx + 1 idx,
+              -- TODO also collect reachcode
+              -- TODO collect max(fdate)
               nhdflowline.nhdplusid,
               nhdplusflowlinevaa.hydroseq,
               dnhydroseq downstream,
               ST_Transform(nhdflowline.geom, 4326) geom,
-              -- ST_LineMerge(flowlines.geom, ST_Transform(nhdflowline.geom, 4326)) geom,
               takeout OR nhdflowline.nhdplusid = takeout_nhdplusid takeout
             FROM nhdflowline_${HU4} nhdflowline
             JOIN nhdplusflowlinevaa_${HU4} nhdplusflowlinevaa USING (nhdplusid)
@@ -49,7 +50,6 @@ INSERT INTO reach_segments
               AND fcode NOT IN (56600) -- coastline
         ),
         -- merge consecutive flowlines together
-        -- TODO accumulate in recursive stage of ^^
         merged AS (
           SELECT
             array_agg(nhdplusid) nhdplusids,
