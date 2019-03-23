@@ -76,7 +76,6 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
-		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -92,6 +91,7 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		-skipfailures \
 		/vsistdout/ \
