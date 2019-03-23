@@ -30,7 +30,9 @@ db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
+		-skipfailures \
 		/vsistdout/ \
 		$< \
 		nhdarea | pv | psql -v ON_ERROR_STOP=1 -qX
@@ -57,8 +59,10 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		/vsistdout/ \
+		-skipfailures \
 		$< \
 		nhdflowline | pv | psql -v ON_ERROR_STOP=1 -qX
 
@@ -72,6 +76,7 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -88,6 +93,7 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
 		-f PGDump \
+		-skipfailures \
 		/vsistdout/ \
 		$< \
 		nhdwaterbody | pv | psql -v ON_ERROR_STOP=1 -qX
