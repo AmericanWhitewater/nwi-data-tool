@@ -197,14 +197,17 @@ db/indexes/nhdwaterbody_%: db/indexes/nhdwaterbody_permanent_identifier_idx.%
 	@true
 
 db/correct_putins: db/snapped_putins db/snapped_takeouts
-	psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
+	-psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
 
 db/flowline: db/postgis
 	$(call create_relation)
 
 # process a specific 4-digit hydrologic unit
 wbd/%: db/snapped_putins.% db/snapped_takeouts.%
-	@echo "Reaches for hydrologic unit $(subst wbd/,,$@) processed."
+	$(eval hu4 := $*)
+	@$(MAKE) db/correct_putins
+	@$(MAKE) db/reach_segments.$(hu4)
+	@echo "Reaches for hydrologic unit $(hu4) processed."
 	@mkdir -p $$(dirname $@)
 	@touch $@
 

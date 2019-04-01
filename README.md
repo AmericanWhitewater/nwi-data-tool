@@ -56,7 +56,7 @@ direnv allow
 10. Stitch linework together between put-ins and take-outs to form
     `reach_segments`.
 
-Steps 2-8 can be executed for a given HU4 (e.g. `1709`) using:
+These steps can be executed for a given HU4 (e.g. `1709`) using:
 
 ```bash
 make -j $(nproc) wbd/1709
