@@ -199,8 +199,79 @@ db/indexes/nhdwaterbody_%: db/indexes/nhdwaterbody_permanent_identifier_idx.%
 db/correct_putins: db/snapped_putins db/snapped_takeouts
 	-psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
 
+db/access: db/snapped_putins db/snapped_takeouts
+	$(call create_relation)
+
+db/descriptive_reach_segments: db/reach_segments
+	$(call create_relation)
+
 db/flowline: db/postgis
 	$(call create_relation)
+
+exports/access.geojson: db/access
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		-where "geom IS NOT NULL" \
+		$(notdir $<)
+
+exports/access.%.geojson: db/access
+	$(eval hu4 := $*)
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		-where "huc4 = '$(hu4)' AND geom IS NOT NULL" \
+		$(notdir $<)
+
+exports/gages.geojson:
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String,Time=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		-select "source, id, name, update_frequency" \
+		gages
+
+exports/rapids.geojson:
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		-where "is_final = true" \
+		rapids
+
+exports/reach_segments.geojson: db/descriptive_reach_segments
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		$(notdir $<)
+
+exports/reach_segments.mbtiles: exports/reach_segments.geojson
+	tippecanoe \
+		-o $@ \
+		--use-attribute-for-id reach_id \
+		-l reach_segments \
+		-n "Generated reach segments" \
+		-Z 5 \
+		-z 13 \
+		$<
+
+exports/reach_segments.%.geojson: db/descriptive_reach_segments
+	$(eval hu4 := $*)
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		-where "huc4 = '$(hu4)'" \
+		$(notdir $<)
 
 # process a specific 4-digit hydrologic unit
 wbd/%: db/snapped_putins.% db/snapped_takeouts.%
