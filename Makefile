@@ -22,7 +22,7 @@ db/all: db/wbdhu4
 
 # NHD water body polygons (rivers)
 db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	$(eval relation := $(basename $@))
+	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
@@ -41,7 +41,7 @@ db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 # NHD Feature Code (FCode) mappings; fetch it from the smallest available
 # source
 db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
-	$(eval relation := $(basename $@))
+	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
@@ -52,7 +52,7 @@ db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
 
 # NHD flow network
 db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	$(eval relation := $(basename $@))
+	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
@@ -70,7 +70,7 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # NHDPlus Value Added Attributes (for navigating the flow network, etc.)
 db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	$(eval relation := $(basename $@))
+	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
@@ -85,7 +85,7 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # NHD water body polygons (lakes, etc.)
 db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
-	$(eval relation := $(basename $@))
+	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
@@ -103,7 +103,7 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 
 # watershed boundaries for 4-digit hydrologic units
 db/wbdhu4: data/WBD_National_GDB.zip db/postgis
-	$(eval relation := $(basename $@))
+	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
