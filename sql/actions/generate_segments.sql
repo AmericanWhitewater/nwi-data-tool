@@ -17,12 +17,14 @@ INSERT INTO reach_segments
     SELECT
       reach_id,
       (
-        WITH RECURSIVE flowlines(idx, nhdplusid, hydroseq, downstream, geom, takeout) AS (
+        WITH RECURSIVE flowlines(idx, nhdplusid, reachcode, hydroseq, downstream, fdate, geom, takeout) AS (
             SELECT
               0 idx,
               nhdflowline.nhdplusid,
+              nhdflowline.reachcode,
               nhdplusflowlinevaa.hydroseq,
               dnhydroseq downstream,
+              nhdflowline.fdate,
               ST_Transform(geom, 4326) geom,
               -- put-in and take-out are on the same segment (642)
               putin_nhdplusid = takeout_nhdplusid takeout
@@ -36,11 +38,11 @@ INSERT INTO reach_segments
             -- stop at the takeout
             SELECT
               idx + 1 idx,
-              -- TODO also collect reachcode
-              -- TODO collect max(fdate)
               nhdflowline.nhdplusid,
+              nhdflowline.reachcode,
               nhdplusflowlinevaa.hydroseq,
               dnhydroseq downstream,
+              nhdflowline.fdate,
               ST_Transform(nhdflowline.geom, 4326) geom,
               takeout OR nhdflowline.nhdplusid = takeout_nhdplusid takeout
             FROM nhdflowline_${HU4} nhdflowline
@@ -53,6 +55,8 @@ INSERT INTO reach_segments
         merged AS (
           SELECT
             array_agg(nhdplusid) nhdplusids,
+            array_agg(distinct reachcode) reachcodes,
+            max(fdate) fdate,
             ST_LineMerge(ST_Union(geom)) geom
           FROM flowlines
         -- ),
@@ -83,6 +87,8 @@ INSERT INTO reach_segments
         locations AS (
           SELECT
             nhdplusids,
+            reachcodes,
+            fdate,
             geom,
             -- line_locate_point: 1st arg isn't a line
             -- 2727 produces a MultiLineString
@@ -109,6 +115,8 @@ INSERT INTO reach_segments
         SELECT
           ROW(
             nhdplusids,
+            reachcodes,
+            fdate,
             ST_LineSubstring(
               geom,
               -- handle put-ins snapped downstream of take-outs
@@ -129,6 +137,8 @@ INSERT INTO reach_segments
   SELECT
     reach_id,
     (segment).nhdplusids,
+    (segment).reachcodes,
+    (segment).fdate,
     (segment).questionable
       -- put-ins or take-outs not on the generated segment are questionable
       OR NOT ST_DWithin((segment).geom::geography, putin_geom::geography, 1)
@@ -139,5 +149,7 @@ INSERT INTO reach_segments
   ON CONFLICT (reach_id) DO UPDATE
   SET
     nhdplusids = EXCLUDED.nhdplusids,
+    reachcodes = EXCLUDED.reachcodes,
+    fdate = EXCLUDED.fdate,
     questionable = EXCLUDED.questionable,
     geom = EXCLUDED.geom;
