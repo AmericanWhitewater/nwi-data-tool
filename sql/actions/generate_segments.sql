@@ -31,7 +31,6 @@ INSERT INTO reach_segments
             FROM nhdflowline_${HU4} nhdflowline
             JOIN nhdplusflowlinevaa_${HU4} nhdplusflowlinevaa USING (nhdplusid)
             WHERE nhdplusid = putin_nhdplusid
-              AND fcode NOT IN (56600) -- coastline
               -- put-in and take-out are the same point (642)
               AND NOT ST_Equals(putin_geom, takeout_geom)
           UNION ALL
@@ -49,7 +48,7 @@ INSERT INTO reach_segments
             JOIN nhdplusflowlinevaa_${HU4} nhdplusflowlinevaa USING (nhdplusid)
             JOIN flowlines ON nhdplusflowlinevaa.hydroseq = flowlines.downstream
             WHERE NOT takeout
-              AND fcode NOT IN (56600) -- coastline
+              AND nhdflowline.fcode NOT IN (56600) -- coastline
         ),
         -- merge consecutive flowlines together
         merged AS (

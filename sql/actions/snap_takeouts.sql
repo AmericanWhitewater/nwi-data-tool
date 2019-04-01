@@ -13,7 +13,7 @@ candidates AS (
   SELECT
     reach_id,
     nhdplusid::bigint,
-    fdate,
+    nhdflowline.fdate,
     wbarea_permanent_identifier wbarea_id,
     ST_Transform(geom, 4326) geom
   FROM nhdflowline_${HU4} nhdflowline
@@ -22,7 +22,7 @@ candidates AS (
     ST_Transform(pt, ST_SRID(geom))::geography,
     2500)
   JOIN nhdplusflowlinevaa_${HU4} nhdplusflowlinevaa USING (nhdplusid)
-  WHERE fcode NOT IN (33600, 33601, 33602, 46003, 46007)
+  WHERE nhdflowline.fcode NOT IN (33600, 33601, 33602, 46003, 46007)
     -- take-outs should not involve going upstream on a tributary (reach 3448)
     -- AND putin_stream_order <= streamorde
     AND putin_stream_level >= streamleve

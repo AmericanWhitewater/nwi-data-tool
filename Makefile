@@ -38,6 +38,37 @@ db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		$< \
 		nhdarea | pv | psql -v ON_ERROR_STOP=1 -qX
 
+db/nhdarea_1802: db/nhdarea_18
+	$(call create_relation)
+
+db/nhdarea_1803: db/nhdarea_18
+	$(call create_relation)
+
+db/nhdarea_1804: db/nhdarea_18
+	$(call create_relation)
+
+db/nhdarea_1805: db/nhdarea_18
+	$(call create_relation)
+
+db/nhdarea_1807: db/nhdarea_18
+	$(call create_relation)
+
+db/nhdarea_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-dim XY \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
+		-f PGDump \
+		-skipfailures \
+		-where "fcode NOT IN (31800, 33600, 33601, 33603, 34300, 34305, 34306, 36400, 40300, 40307, 40308, 40309, 44500, 46003, 46007, 46100, 48400, 48500, 56800)" \
+		/vsistdout/ \
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX
+
 # NHD Feature Code (FCode) mappings; fetch it from the smallest available
 # source
 db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
@@ -68,8 +99,22 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		$< \
 		nhdflowline | pv | psql -v ON_ERROR_STOP=1 -qX
 
-# NHDPlus Value Added Attributes (for navigating the flow network, etc.)
-db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
+db/nhdflowline_1802: db/nhdflowline_18
+	$(call create_relation)
+
+db/nhdflowline_1803: db/nhdflowline_18
+	$(call create_relation)
+
+db/nhdflowline_1804: db/nhdflowline_18
+	$(call create_relation)
+
+db/nhdflowline_1805: db/nhdflowline_18
+	$(call create_relation)
+
+db/nhdflowline_1807: db/nhdflowline_18
+	$(call create_relation)
+
+db/nhdflowline_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.shp db/postgis
 	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
@@ -78,10 +123,51 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
+		-f PGDump \
+		/vsistdout/ \
+		-skipfailures \
+		-where "fcode NOT IN (33600, 33601, 33603, 42000, 42001, 42002, 42003, 42800, 42801, 42802, 42803, 42804, 42805, 42806, 42807, 42808, 42809, 42810, 42811, 42812, 42813, 42814, 42815, 42816, 46003, 46007)" \
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX
+
+# NHDPlus Value Added Attributes (for navigating the flow network, etc.)
+db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-nln $(relation) \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
 		nhdplusflowlinevaa | pv | psql -v ON_ERROR_STOP=1 -qX
+
+db/nhdplusflowlinevaa_1802: db/nhdplusflowlinevaa_18
+	$(call create_relation)
+
+db/nhdplusflowlinevaa_1803: db/nhdplusflowlinevaa_18
+	$(call create_relation)
+
+db/nhdplusflowlinevaa_1804: db/nhdplusflowlinevaa_18
+	$(call create_relation)
+
+db/nhdplusflowlinevaa_1805: db/nhdplusflowlinevaa_18
+	$(call create_relation)
+
+db/nhdplusflowlinevaa_1807: db/nhdplusflowlinevaa_18
+	$(call create_relation)
+
+db/nhdplusflowlinevaa_18: data/NHDPlusCA/NHDPlus18/NHDPlusAttributes/PlusFlowlineVAA.dbf db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-nln $(relation) \
+		-lco PRECISION=NO \
+		-f PGDump \
+		/vsistdout/ \
+		$< \
+		plusflowlinevaa | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # NHD water body polygons (lakes, etc.)
 db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
@@ -100,6 +186,37 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		/vsistdout/ \
 		$< \
 		nhdwaterbody | pv | psql -v ON_ERROR_STOP=1 -qX
+
+db/nhdwaterbody_1802: db/nhdwaterbody_18
+	$(call create_relation)
+
+db/nhdwaterbody_1803: db/nhdwaterbody_18
+	$(call create_relation)
+
+db/nhdwaterbody_1804: db/nhdwaterbody_18
+	$(call create_relation)
+
+db/nhdwaterbody_1805: db/nhdwaterbody_18
+	$(call create_relation)
+
+db/nhdwaterbody_1807: db/nhdwaterbody_18
+	$(call create_relation)
+
+db/nhdwaterbody_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDWaterbody.shp db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-dim XY \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
+		-f PGDump \
+		/vsistdout/ \
+		-skipfailures \
+		-where "fcode NOT IN (33600, 33601, 33603, 42000, 42001, 42002, 42003, 42800, 42801, 42802, 42803, 42804, 42805, 42806, 42807, 42808, 42809, 42810, 42811, 42812, 42813, 42814, 42815, 42816, 46003, 46007)" \
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # watershed boundaries for 4-digit hydrologic units
 db/wbdhu4: data/WBD_National_GDB.zip db/postgis
@@ -290,7 +407,26 @@ wbd/%: db/snapped_putins.% db/snapped_takeouts.%
 data/NHDPLUS_H_%_HU4_GDB.zip:
 	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU4/HighResolution/GDB/$(notdir $@))
 
+
 .PRECIOUS: data/WBD_National_GDB.zip
 
 data/WBD_National_GDB.zip:
 	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/WBD/National/GDB/WBD_National_GDB.zip)
+
+.PRECIOUS: data/NHDPlusV21_CA_18_NHDPlusAttributes_08.7z
+
+data/NHDPlusV21_CA_18_NHDPlusAttributes_08.7z:
+	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusCA/NHDPlusV21_CA_18_NHDPlusAttributes_08.7z)
+
+.PRECIOUS: data/NHDPlusV21_CA_18_NHDSnapshotFGDB_05.7z
+
+data/NHDPlusV21_CA_18_NHDSnapshot_05.7z:
+	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusCA/NHDPlusV21_CA_18_NHDSnapshot_05.7z)
+
+data/NHDPlusCA/NHDPlus18/NHDPlusAttributes/PlusFlowlineVAA.dbf: data/NHDPlusV21_CA_18_NHDPlusAttributes_08.7z
+	7z x -odata/ -y $<
+	@touch $@
+
+data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.shp data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDWaterbody.shp: data/NHDPlusV21_CA_18_NHDSnapshot_05.7z
+	7z x -odata/ -y $<
+	touch $@
