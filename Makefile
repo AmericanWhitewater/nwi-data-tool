@@ -33,6 +33,7 @@ db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		-skipfailures \
+		-where "fcode NOT IN (31800, 33600, 33601, 33603, 34300, 34305, 34306, 36400, 40300, 40307, 40308, 40309, 44500, 46003, 46007, 46100, 48400, 48500, 56800)" \
 		/vsistdout/ \
 		$< \
 		nhdarea | pv | psql -v ON_ERROR_STOP=1 -qX
@@ -63,6 +64,7 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-f PGDump \
 		/vsistdout/ \
 		-skipfailures \
+		-where "fcode NOT IN (33600, 33601, 33603, 42000, 42001, 42002, 42003, 42800, 42801, 42802, 42803, 42804, 42805, 42806, 42807, 42808, 42809, 42810, 42811, 42812, 42813, 42814, 42815, 42816, 46003, 46007)" \
 		$< \
 		nhdflowline | pv | psql -v ON_ERROR_STOP=1 -qX
 
@@ -94,6 +96,7 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		-skipfailures \
+		-where "fcode NOT IN (36100, 37800, 39001, 39005, 39006, 39011, 39012, 43601, 43603, 43604, 43605, 43606, 43608, 43609, 43610, 43611, 43612, 43624, 43625, 43626, 46600, 46601, 46602, 49300)" \
 		/vsistdout/ \
 		$< \
 		nhdwaterbody | pv | psql -v ON_ERROR_STOP=1 -qX
