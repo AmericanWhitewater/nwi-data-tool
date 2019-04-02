@@ -586,6 +586,20 @@ db/wbdhu4: data/WBD_National_GDB.zip db/postgis
 		$< \
 		$(relation) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
 
+# watershed boundaries for 8-digit hydrologic units in Alaska
+db/wbdhu8: data/WBD_National_GDB.zip db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-where "huc8 LIKE '1902%'" \
+		-f PGDump \
+		/vsistdout/ \
+		$< \
+		$(relation) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
+
 # reaches for a particular 4-digit hydrologic unit
 db/reaches.%: sql/reaches_hu4.sql db/wbdhu4
 	$(eval hu4 := $*)
@@ -594,12 +608,28 @@ db/reaches.%: sql/reaches_hu4.sql db/wbdhu4
 	  HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -qX1
 
+db/ak/reaches.%: sql/reaches_hu8.sql db/wbdhu8
+	$(eval hu8 := $*)
+	$(eval relation := $(notdir $(basename $@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu8)" > /dev/null 2>&1 || \
+	  HU8=$(hu8) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -qX1
+
 # snapped put-ins for a particular 4-digit hydrologic unit
 db/snapped_putins.%: sql/actions/snap_putins.sql \
 										 db/flowline db/snapped_putins db/nhdarea_% \
 										 db/nhdflowline_% db/nhdplusflowlinevaa_% \
 									   db/nhdwaterbody_% db/reaches.% \
 										 db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
+	$(eval hu4 := $*)
+	HU4=$(hu4) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -X1
+
+db/ak/snapped_putins.%: sql/actions/snap_putins.sql \
+												db/flowline db/snapped_putins db/nhdarea_% \
+												db/nhdflowline_% db/nhdplusflowlinevaa_% \
+												db/nhdwaterbody_% db/ak/reaches.% \
+												db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
 	$(eval hu4 := $*)
 	HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -X1
@@ -614,9 +644,25 @@ db/snapped_takeouts.%: sql/actions/snap_takeouts.sql \
 	HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -X1
 
+db/ak/snapped_takeouts.%: sql/actions/snap_takeouts.sql \
+													db/flowline db/snapped_takeouts db/nhdarea_% \
+													db/nhdflowline_% db/nhdplusflowlinevaa_% \
+													db/nhdwaterbody_% db/ak/reaches.% db/ak/snapped_putins.% \
+													db/indexes/nhdarea_% db/indexes/nhdwaterbody_%
+	$(eval hu4 := $*)
+	HU4=$(hu4) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -X1
+
 db/reach_segments.%: sql/actions/generate_segments.sql db/segment db/reach_segments \
 										 db/indexes/nhdflowline_% db/indexes/nhdplusflowlinevaa_% \
 										 db/snapped_putins db/snapped_takeouts
+	$(eval hu4 := $*)
+	HU4=$(hu4) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -X1
+
+db/ak/reach_segments.%: sql/actions/generate_segments.sql db/segment db/reach_segments \
+												db/indexes/nhdflowline_% db/indexes/nhdplusflowlinevaa_% \
+												db/snapped_putins db/snapped_takeouts
 	$(eval hu4 := $*)
 	HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -X1
@@ -745,6 +791,15 @@ exports/reach_segments.%.geojson: db/descriptive_reach_segments
 		-where "huc4 = '$(hu4)'" \
 		$(notdir $<)
 
+# process a specific 8-digit hydrologic unit (for Alaska)
+wbd/ak/%: db/ak/snapped_putins.% db/ak/snapped_takeouts.%
+	$(eval hu8 := $*)
+	@$(MAKE) db/correct_putins
+	@$(MAKE) db/ak/reach_segments.$(hu8)
+	@echo "Reaches for hydrologic unit $(hu8) processed."
+	@mkdir -p $$(dirname $@)
+	@touch $@
+
 # process a specific 4-digit hydrologic unit
 wbd/%: db/snapped_putins.% db/snapped_takeouts.%
 	$(eval hu4 := $*)
@@ -757,11 +812,52 @@ wbd/%: db/snapped_putins.% db/snapped_takeouts.%
 ### Datasets
 
 # don't delete these; they're large enough that re-downloading them is annoying
+.PRECIOUS: data/NHDPLUS_H_19020401_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020401_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020401_HU8_GDB.zip)
+
+.PRECIOUS: data/NHDPLUS_H_19020402_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020402_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020402_HU8_GDB.zip)
+
+.PRECIOUS: data/NHDPLUS_H_19020501_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020501_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020501_HU8_GDB.zip)
+
+.PRECIOUS: data/NHDPLUS_H_19020502_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020502_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020502_HU8_GDB.zip)
+
+.PRECIOUS: data/NHDPLUS_H_19020503_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020503_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020503_HU8_GDB.zip)
+
+.PRECIOUS: data/NHDPLUS_H_19020504_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020504_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020504_HU8_GDB.zip)
+
+.PRECIOUS: data/NHDPLUS_H_19020505_HU4_GDB.zip
+
+# TODO filename is wrong
+data/NHDPLUS_H_19020505_HU4_GDB.zip:
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU8/HighResolution/GDB/NHDPLUS_H_19020505_HU8_GDB.zip)
+
 .PRECIOUS: data/NHDPLUS_H_%_HU4_GDB.zip
 
 data/NHDPLUS_H_%_HU4_GDB.zip:
 	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/NHDPlus/HU4/HighResolution/GDB/$(notdir $@))
-
 
 .PRECIOUS: data/WBD_National_GDB.zip
 
