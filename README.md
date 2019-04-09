@@ -53,7 +53,12 @@ direnv allow
     reaches so that they match the upstream reach's take-out location.
     (Take-outs are snapped to downstream NHD segments using put-in
     information.)
-10. Stitch linework together between put-ins and take-outs to form
+10. Generate candidate reach geometries based on put-in and take-out
+    locations (if take-outs were incorrectly snapped, these geometries will
+    be capped by distance)
+11. Re-snap take-outs to candidate reach geometries (to ensure that they
+    don't involve traveling upstream)
+12. Stitch linework together and crop between put-ins and take-outs to form
     `reach_segments`.
 
 These steps can be executed for a given HU4 (e.g. `1709`) using:
@@ -71,7 +76,8 @@ Step 9 can be repeated as necessary:
 make db/correct_putins
 ```
 
-Step 10:
+Steps 10-12 can also be repeated, in case snapped put-in or take-out locations
+have been corrected:
 
 ```bash
 make db/reach_segments.1709

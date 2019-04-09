@@ -4,7 +4,8 @@ CREATE VIEW descriptive_reach_segments AS
     river,
     section,
     huc4,
-    questionable review,
+    review,
+    review_reason,
     reach_segments.geom
   FROM reach_segments
   JOIN snapped_putins USING (reach_id)
