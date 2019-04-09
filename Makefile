@@ -6,7 +6,7 @@ default: db/all
 # these targets don't produce files; always run them
 .PHONY: DATABASE_URL db db/postgis db/all db/nhdfcode db/nhdarea_% \
 				db/nhdflowline_% db/nhdplusflowlinevaa_% db/nhdwaterbody_% db/wbdhu4 \
-				db/reaches_% db/snapped_putins_% db/snapped_takeouts_% wbd/%
+				db/reaches_% db/snapped_putins_% db/snapped_takeouts_%
 
 DATABASE_URL:
 	@test "${$@}" || (echo "$@ is undefined" && false)
