@@ -13,7 +13,7 @@ DATABASE_URL:
 
 db: DATABASE_URL
 	@psql -c "SELECT 1" > /dev/null 2>&1 || \
-	createdb
+	(createdb && psql -c "CREATE SCHEMA nhd" && psql -c "ALTER DATABASE ${PGDATABASE} SET search_path TO public,nhd")
 
 db/postgis: db
 	$(call create_extension)
@@ -29,6 +29,8 @@ db/nhdarea_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDArea.shp db/p
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -75,6 +77,8 @@ db/nhdarea_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp db/p
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -102,6 +106,8 @@ db/nhdarea_20: data/NHDPlusHI/NHDPlus20/NHDSnapshot/Hydrography/NHDArea.shp db/p
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -128,6 +134,8 @@ db/nhdarea_21: data/NHDPlusCI/NHDPlus21/NHDSnapshot/Hydrography/NHDArea.shp db/p
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -152,6 +160,8 @@ db/nhdarea_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -168,6 +178,8 @@ db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -182,6 +194,8 @@ db/nhdflowline_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDFlowline.
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -228,6 +242,8 @@ db/nhdflowline_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -255,6 +271,8 @@ db/nhdflowline_20: data/NHDPlusHI/NHDPlus20/NHDSnapshot/Hydrography/NHDFlowline.
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -281,6 +299,8 @@ db/nhdflowline_21: data/NHDPlusCI/NHDPlus21/NHDSnapshot/Hydrography/NHDFlowline.
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -305,6 +325,8 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -322,6 +344,8 @@ db/nhdplusflowlinevaa_04: data/NHDPlusGL/NHDPlus04/NHDPlusAttributes/PlusFlowlin
 		--config PG_USE_COPY YES \
 		-nln $(relation) \
 		-lco PRECISION=NO \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -364,6 +388,8 @@ db/nhdplusflowlinevaa_18: data/NHDPlusCA/NHDPlus18/NHDPlusAttributes/PlusFlowlin
 		--config PG_USE_COPY YES \
 		-nln $(relation) \
 		-lco PRECISION=NO \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -387,6 +413,8 @@ db/nhdplusflowlinevaa_20: data/NHDPlusHI/NHDPlus20/NHDPlusAttributes/PlusFlowlin
 		--config PG_USE_COPY YES \
 		-nln $(relation) \
 		-lco PRECISION=NO \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -409,6 +437,8 @@ db/nhdplusflowlinevaa_21: data/NHDPlusCI/NHDPlus21/NHDPlusAttributes/PlusFlowlin
 		--config PG_USE_COPY YES \
 		-nln $(relation) \
 		-lco PRECISION=NO \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
@@ -427,6 +457,8 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
 	ogr2ogr \
 		--config PG_USE_COPY YES \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-f PGDump \
 		/vsistdout/ \
@@ -442,6 +474,8 @@ db/nhdwaterbody_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDWaterbod
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -488,6 +522,8 @@ db/nhdwaterbody_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDWaterbod
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
@@ -515,6 +551,8 @@ db/nhdwaterbody_20: data/NHDPlusHI/NHDPlus20/NHDSnapshot/Hydrography/NHDWaterbod
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt PROMOTE_TO_MULTI \
 		-f PGDump \
@@ -541,6 +579,8 @@ db/nhdwaterbody_21: data/NHDPlusCI/NHDPlus21/NHDSnapshot/Hydrography/NHDWaterbod
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-f PGDump \
 		-skipfailures \
@@ -564,6 +604,8 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
 		-nln $(relation) \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
