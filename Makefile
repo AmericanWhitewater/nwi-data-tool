@@ -696,6 +696,7 @@ db/ak/snapped_takeouts.%: sql/actions/snap_takeouts.sql \
 	  psql -v ON_ERROR_STOP=1 -X1
 
 db/reach_segments.%: sql/actions/generate_segments.sql db/segment db/reach_segments \
+										 db/nhdarea_% db/nhdwaterbody_% \
 										 db/indexes/nhdflowline_% db/indexes/nhdplusflowlinevaa_% \
 										 db/snapped_putins db/snapped_takeouts
 	$(eval hu4 := $*)
