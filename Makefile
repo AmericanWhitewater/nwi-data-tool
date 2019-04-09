@@ -38,6 +38,7 @@ db/nhdarea_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDArea.shp db/p
 		$< | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # 0415 is special; it partially exists in NHDPlus HR
+db/nhdarea_0415 \
 db/nhdarea_0401 \
 db/nhdarea_0402 \
 db/nhdarea_0403 \
@@ -191,6 +192,7 @@ db/nhdflowline_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDFlowline.
 		$< | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # 0415 is special; it partially exists in NHDPlus HR
+db/nhdflowline_0415 \
 db/nhdflowline_0401 \
 db/nhdflowline_0402 \
 db/nhdflowline_0403 \
@@ -328,6 +330,7 @@ db/nhdplusflowlinevaa_04: data/NHDPlusGL/NHDPlus04/NHDPlusAttributes/PlusFlowlin
 		plusflowlinevaa | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # 0415 is special; it partially exists in NHDPlus HR
+db/nhdplusflowlinevaa_0415 \
 db/nhdplusflowlinevaa_0401 \
 db/nhdplusflowlinevaa_0402 \
 db/nhdplusflowlinevaa_0403 \
@@ -451,6 +454,7 @@ db/nhdwaterbody_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDWaterbod
 		$< | pv | psql -v ON_ERROR_STOP=1 -qX
 
 # 0415 is special; it partially exists in NHDPlus HR
+db/nhdwaterbody_0415 \
 db/nhdwaterbody_0401 \
 db/nhdwaterbody_0402 \
 db/nhdwaterbody_0403 \
