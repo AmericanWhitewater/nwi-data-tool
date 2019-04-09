@@ -86,8 +86,7 @@ db/nhdarea_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp db/p
 db/nhdarea_1802 \
 db/nhdarea_1803 \
 db/nhdarea_1804 \
-db/nhdarea_1805 \
-db/nhdarea_1807: sql/nhdarea_hu4.sql db/nhdarea_18
+db/nhdarea_1805: sql/nhdarea_hu4.sql db/nhdarea_18
 	$(eval relation := $(notdir $@))
 	$(eval hu4 := $(subst nhdarea_,,$(notdir $@)))
 	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
@@ -240,8 +239,7 @@ db/nhdflowline_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.
 db/nhdflowline_1802 \
 db/nhdflowline_1803 \
 db/nhdflowline_1804 \
-db/nhdflowline_1805 \
-db/nhdflowline_1807: sql/nhdflowline_hu4.sql db/nhdflowline_18
+db/nhdflowline_1805: sql/nhdflowline_hu4.sql db/nhdflowline_18
 	$(eval relation := $(notdir $@))
 	$(eval hu4 := $(subst nhdflowline_,,$(notdir $@)))
 	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
@@ -374,8 +372,7 @@ db/nhdplusflowlinevaa_18: data/NHDPlusCA/NHDPlus18/NHDPlusAttributes/PlusFlowlin
 db/nhdplusflowlinevaa_1802 \
 db/nhdplusflowlinevaa_1803 \
 db/nhdplusflowlinevaa_1804 \
-db/nhdplusflowlinevaa_1805 \
-db/nhdplusflowlinevaa_1807: sql/nhdplusflowlinevaa_hu4.sql db/nhdplusflowlinevaa_18
+db/nhdplusflowlinevaa_1805: sql/nhdplusflowlinevaa_hu4.sql db/nhdplusflowlinevaa_18
 	$(eval relation := $(notdir $@))
 	$(eval hu4 := $(subst nhdplusflowlinevaa_,,$(notdir $@)))
 	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
@@ -502,8 +499,7 @@ db/nhdwaterbody_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDWaterbod
 db/nhdwaterbody_1802 \
 db/nhdwaterbody_1803 \
 db/nhdwaterbody_1804 \
-db/nhdwaterbody_1805 \
-db/nhdwaterbody_1807: sql/nhdwaterbody_hu4.sql db/nhdwaterbody_18
+db/nhdwaterbody_1805: sql/nhdwaterbody_hu4.sql db/nhdwaterbody_18
 	$(eval relation := $(notdir $@))
 	$(eval hu4 := $(subst nhdwaterbody_,,$(notdir $@)))
 	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
