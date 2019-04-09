@@ -778,6 +778,17 @@ exports/access.geojson: db/access
 		-where "geom IS NOT NULL" \
 		$(notdir $<)
 
+exports/access.mbtiles: exports/access.geojson
+	tippecanoe \
+		-f \
+		-o $@ \
+		--use-attribute-for-id id \
+		-l access \
+		-n "Corrected access points" \
+		-Z 5 \
+		-z 13 \
+		$<
+
 exports/access.%.geojson: db/access
 	$(eval hu4 := $*)
 	mkdir -p $$(dirname $@)
@@ -803,8 +814,18 @@ exports/rapids.geojson:
 		-mapFieldType DateTime=String \
 		"PG:${DATABASE_URL}" \
 		-lco RFC7946=YES \
-		-where "is_final = true" \
-		rapids
+		-sql "SELECT isplayspot, iswaterfall, isputin, name, reachid AS reach_id, isaccess, isportage, approximate, distance, difficulty, ishazard, description, istakeout, rloc FROM rapids WHERE is_final AND NOT deleted AND rloc IS NOT NULL"
+
+exports/rapids.mbtiles: exports/rapids.geojson
+	tippecanoe \
+		-f \
+		-o $@ \
+		--use-attribute-for-id rapidid \
+		-l rapids \
+		-n "Raw rapid data" \
+		-Z 5 \
+		-z 13 \
+		$<
 
 exports/reach_segments.geojson: db/descriptive_reach_segments
 	mkdir -p $$(dirname $@)
@@ -812,10 +833,12 @@ exports/reach_segments.geojson: db/descriptive_reach_segments
 		-mapFieldType DateTime=String \
 		"PG:${DATABASE_URL}" \
 		-lco RFC7946=YES \
+		-where "geom IS NOT NULL" \
 		$(notdir $<)
 
 exports/reach_segments.mbtiles: exports/reach_segments.geojson
 	tippecanoe \
+		-f \
 		-o $@ \
 		--use-attribute-for-id reach_id \
 		-l reach_segments \
