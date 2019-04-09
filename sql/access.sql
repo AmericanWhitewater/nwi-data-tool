@@ -1,5 +1,6 @@
 CREATE VIEW access AS
   SELECT
+    replace(type, '-', '') || '-' || reach_id id,
     reach_id,
     river,
     section,
