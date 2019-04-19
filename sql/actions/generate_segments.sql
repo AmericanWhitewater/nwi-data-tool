@@ -10,7 +10,7 @@ INSERT INTO reach_segments
       p.distance putin_distance,
       t.flowline_point takeout_flowline_point,
       t.geom takeout_geom,
-      -- default to 400km
+      -- default to 40km
       COALESCE(NULLIF(r.length, 0) * 1609.34, 40000) length,
       r.ploc original_putin_geom,
       r.tloc original_takeout_geom
