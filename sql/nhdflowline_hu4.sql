@@ -1,6 +1,6 @@
-DROP MATERIALIZED VIEW IF EXISTS nhdflowline_${HU4};
+DROP MATERIALIZED VIEW IF EXISTS nhd.nhdflowline_${HU4};
 
-CREATE MATERIALIZED VIEW nhdflowline_${HU4} AS
+CREATE MATERIALIZED VIEW nhd.nhdflowline_${HU4} AS
   SELECT
     *,
     -- shim something in in place of an nhdplusid
