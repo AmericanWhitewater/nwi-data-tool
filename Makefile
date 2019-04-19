@@ -21,53 +21,28 @@ db/postgis: db
 db/all: db/wbdhu4
 
 # NHD water body polygons (rivers)
+
+# shadow as nhdarea_04_real (so we can target it as an HU2)
 db/nhdarea_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDArea.shp db/postgis
 	$(eval relation := $(notdir $@))
-	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
-	ogr2ogr \
+	@psql -c "\d $(relation)_real" > /dev/null 2>&1 || \
+	(ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-lco SCHEMA=nhd \
 		-lco CREATE_SCHEMA=OFF \
-		-nln $(relation) \
+		-nln $(relation)_real \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		-skipfailures \
 		-where "fcode NOT IN (31800, 33600, 33601, 33603, 34300, 34305, 34306, 36400, 40300, 40307, 40308, 40309, 44500, 46003, 46007, 46100, 48400, 48500, 56800)" \
 		/vsistdout/ \
-		$< | pv | psql -v ON_ERROR_STOP=1 -qX
-
-# 0415 is special; it partially exists in NHDPlus HR
-db/nhdarea_0415 \
-db/nhdarea_0401 \
-db/nhdarea_0402 \
-db/nhdarea_0403 \
-db/nhdarea_0404 \
-db/nhdarea_0405 \
-db/nhdarea_0406 \
-db/nhdarea_0407 \
-db/nhdarea_0408 \
-db/nhdarea_0409 \
-db/nhdarea_0410 \
-db/nhdarea_0411 \
-db/nhdarea_0412 \
-db/nhdarea_0413 \
-db/nhdarea_0414 \
-db/nhdarea_0416 \
-db/nhdarea_0417 \
-db/nhdarea_0418 \
-db/nhdarea_0419 \
-db/nhdarea_0420 \
-db/nhdarea_0422 \
-db/nhdarea_0426: sql/nhdarea_hu4.sql db/nhdarea_04
-	$(eval relation := $(notdir $@))
-	$(eval hu4 := $(subst nhdarea_,,$(notdir $@)))
-	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX && \
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
-	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
-	  psql -v ON_ERROR_STOP=1 -qX1
+	  HU4=04 HU2=04_real envsubst < sql/nhdarea_hu4.sql | \
+	  psql -v ON_ERROR_STOP=1 -qX1)
 
 db/nhdarea_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp db/postgis
 	$(eval relation := $(notdir $@))
@@ -188,51 +163,24 @@ db/nhdfcode: data/NHDPLUS_H_0904_HU4_GDB.zip
 # NHD flow network
 db/nhdflowline_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDFlowline.shp db/postgis
 	$(eval relation := $(notdir $@))
-	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
-	ogr2ogr \
+	@psql -c "\d $(relation)_real" > /dev/null 2>&1 || \
+	(ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-lco SCHEMA=nhd \
 		-lco CREATE_SCHEMA=OFF \
-		-nln $(relation) \
+		-nln $(relation)_real \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		-skipfailures \
 		-where "fcode NOT IN (33600, 33601, 33603, 42000, 42001, 42002, 42003, 42800, 42801, 42802, 42803, 42804, 42805, 42806, 42807, 42808, 42809, 42810, 42811, 42812, 42813, 42814, 42815, 42816, 46003, 46007)" \
 		/vsistdout/ \
-		$< | pv | psql -v ON_ERROR_STOP=1 -qX
-
-# 0415 is special; it partially exists in NHDPlus HR
-db/nhdflowline_0415 \
-db/nhdflowline_0401 \
-db/nhdflowline_0402 \
-db/nhdflowline_0403 \
-db/nhdflowline_0404 \
-db/nhdflowline_0405 \
-db/nhdflowline_0406 \
-db/nhdflowline_0407 \
-db/nhdflowline_0408 \
-db/nhdflowline_0409 \
-db/nhdflowline_0410 \
-db/nhdflowline_0411 \
-db/nhdflowline_0412 \
-db/nhdflowline_0413 \
-db/nhdflowline_0414 \
-db/nhdflowline_0416 \
-db/nhdflowline_0417 \
-db/nhdflowline_0418 \
-db/nhdflowline_0419 \
-db/nhdflowline_0420 \
-db/nhdflowline_0422 \
-db/nhdflowline_0426: sql/nhdflowline_hu4.sql db/nhdflowline_04
-	$(eval relation := $(notdir $@))
-	$(eval hu4 := $(subst nhdflowline_,,$(notdir $@)))
-	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX && \
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
-	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
-	  psql -v ON_ERROR_STOP=1 -qX1
+	  HU4=04 HU2=04_real envsubst < sql/nhdflowline_hu4.sql | \
+	  psql -v ON_ERROR_STOP=1 -qX1)
 
 db/nhdflowline_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.shp db/postgis
 	$(eval relation := $(notdir $@))
@@ -339,47 +287,20 @@ db/nhdflowline_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 # NHDPlus Value Added Attributes (for navigating the flow network, etc.)
 db/nhdplusflowlinevaa_04: data/NHDPlusGL/NHDPlus04/NHDPlusAttributes/PlusFlowlineVAA.dbf db/postgis
 	$(eval relation := $(notdir $@))
-	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
-	ogr2ogr \
+	@psql -c "\d $(relation)_real" > /dev/null 2>&1 || \
+	(ogr2ogr \
 		--config PG_USE_COPY YES \
-		-nln $(relation) \
+		-nln $(relation)_real \
 		-lco PRECISION=NO \
 		-lco SCHEMA=nhd \
 		-lco CREATE_SCHEMA=OFF \
 		-f PGDump \
 		/vsistdout/ \
 		$< \
-		plusflowlinevaa | pv | psql -v ON_ERROR_STOP=1 -qX
-
-# 0415 is special; it partially exists in NHDPlus HR
-db/nhdplusflowlinevaa_0415 \
-db/nhdplusflowlinevaa_0401 \
-db/nhdplusflowlinevaa_0402 \
-db/nhdplusflowlinevaa_0403 \
-db/nhdplusflowlinevaa_0404 \
-db/nhdplusflowlinevaa_0405 \
-db/nhdplusflowlinevaa_0406 \
-db/nhdplusflowlinevaa_0407 \
-db/nhdplusflowlinevaa_0408 \
-db/nhdplusflowlinevaa_0409 \
-db/nhdplusflowlinevaa_0410 \
-db/nhdplusflowlinevaa_0411 \
-db/nhdplusflowlinevaa_0412 \
-db/nhdplusflowlinevaa_0413 \
-db/nhdplusflowlinevaa_0414 \
-db/nhdplusflowlinevaa_0416 \
-db/nhdplusflowlinevaa_0417 \
-db/nhdplusflowlinevaa_0418 \
-db/nhdplusflowlinevaa_0419 \
-db/nhdplusflowlinevaa_0420 \
-db/nhdplusflowlinevaa_0422 \
-db/nhdplusflowlinevaa_0426: sql/nhdplusflowlinevaa_hu4.sql db/nhdplusflowlinevaa_04
-	$(eval relation := $(notdir $@))
-	$(eval hu4 := $(subst nhdplusflowlinevaa_,,$(notdir $@)))
-	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+		plusflowlinevaa | pv | psql -v ON_ERROR_STOP=1 -qX && \
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
-	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
-	  psql -v ON_ERROR_STOP=1 -qX1
+	  HU4=04 HU2=04_real envsubst < sql/nhdplusflowlinevaa_hu4.sql | \
+	  psql -v ON_ERROR_STOP=1 -qX1)
 
 db/nhdplusflowlinevaa_18: data/NHDPlusCA/NHDPlus18/NHDPlusAttributes/PlusFlowlineVAA.dbf db/postgis
 	$(eval relation := $(notdir $@))
@@ -468,51 +389,24 @@ db/nhdplusflowlinevaa_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 # NHD water body polygons (lakes, etc.)
 db/nhdwaterbody_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDWaterbody.shp db/postgis
 	$(eval relation := $(notdir $@))
-	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
-	ogr2ogr \
+	@psql -c "\d $(relation)_real" > /dev/null 2>&1 || \
+	(ogr2ogr \
 		--config PG_USE_COPY YES \
 		-dim XY \
 		-lco GEOMETRY_NAME=geom \
 		-lco POSTGIS_VERSION=2.2 \
 		-lco SCHEMA=nhd \
 		-lco CREATE_SCHEMA=OFF \
-		-nln $(relation) \
+		-nln $(relation)_real \
 		-nlt CONVERT_TO_LINEAR \
 		-f PGDump \
 		-skipfailures \
 		-where "fcode NOT IN (36100, 37800, 39001, 39005, 39006, 39011, 39012, 43601, 43603, 43604, 43605, 43606, 43608, 43609, 43610, 43611, 43612, 43624, 43625, 43626, 46600, 46601, 46602, 49300)" \
 		/vsistdout/ \
-		$< | pv | psql -v ON_ERROR_STOP=1 -qX
-
-# 0415 is special; it partially exists in NHDPlus HR
-db/nhdwaterbody_0415 \
-db/nhdwaterbody_0401 \
-db/nhdwaterbody_0402 \
-db/nhdwaterbody_0403 \
-db/nhdwaterbody_0404 \
-db/nhdwaterbody_0405 \
-db/nhdwaterbody_0406 \
-db/nhdwaterbody_0407 \
-db/nhdwaterbody_0408 \
-db/nhdwaterbody_0409 \
-db/nhdwaterbody_0410 \
-db/nhdwaterbody_0411 \
-db/nhdwaterbody_0412 \
-db/nhdwaterbody_0413 \
-db/nhdwaterbody_0414 \
-db/nhdwaterbody_0416 \
-db/nhdwaterbody_0417 \
-db/nhdwaterbody_0418 \
-db/nhdwaterbody_0419 \
-db/nhdwaterbody_0420 \
-db/nhdwaterbody_0422 \
-db/nhdwaterbody_0426: sql/nhdwaterbody_hu4.sql db/nhdwaterbody_04
-	$(eval relation := $(notdir $@))
-	$(eval hu4 := $(subst nhdwaterbody_,,$(notdir $@)))
-	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX && \
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
-	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
-	  psql -v ON_ERROR_STOP=1 -qX1
+	  HU4=04 HU2=04_real envsubst < sql/nhdwaterbody_hu4.sql | \
+	  psql -v ON_ERROR_STOP=1 -qX1)
 
 db/nhdwaterbody_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDWaterbody.shp db/postgis
 	$(eval relation := $(notdir $@))
@@ -642,6 +536,13 @@ db/wbdhu8: data/WBD_National_GDB.zip db/postgis
 		$< \
 		$(relation) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
 
+db/reaches.04: sql/reaches_hu2.sql db/wbdhu4
+	$(eval hu2 := 04)
+	$(eval relation := $(notdir $(basename $@)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu2)" > /dev/null 2>&1 || \
+	  HU2=$(hu2) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -qX1
+
 # reaches for a particular 4-digit hydrologic unit
 db/reaches.%: sql/reaches_hu4.sql db/wbdhu4
 	$(eval hu4 := $*)
@@ -757,8 +658,9 @@ db/indexes/nhdwaterbody_permanent_identifier_idx.%: sql/nhdwaterbody_hu4_permane
 db/indexes/nhdwaterbody_%: db/indexes/nhdwaterbody_permanent_identifier_idx.%
 	@true
 
-db/correct_putins: db/snapped_putins db/snapped_takeouts
-	-psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
+db/correct_putins.%: db/snapped_putins db/snapped_takeouts
+	$(eval hu4 := $*)
+	-HU4=$(hu4) psql -v ON_ERROR_STOP=1 -X1f sql/actions/correct_putins.sql
 
 db/access: db/snapped_putins db/snapped_takeouts
 	$(call create_relation)

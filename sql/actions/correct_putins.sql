@@ -14,4 +14,5 @@ FROM snapped_takeouts t
 -- find put-in / take-out points within 25m of one another
 WHERE ST_DWithin(p.original_point::geography, t.original_point::geography, 25)
   -- and where the snapped points are NOT within 25m of one another
-  AND NOT ST_DWithin(p.geom::geography, t.geom::geography, 25);
+  AND NOT ST_DWithin(p.geom::geography, t.geom::geography, 25)
+  AND t.huc4 = '${HU4}';
