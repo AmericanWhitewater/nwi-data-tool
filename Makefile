@@ -718,6 +718,106 @@ exports/gages.geojson:
 		-select "source, id, name, update_frequency" \
 		gages
 
+exports/nhd.mbtiles: exports/nhdflowline.mbtiles exports/nhdpolygon.mbtiles
+	mkdir -p $$(dirname $@)
+	tile-join -n NHD -f -o $@ $^
+
+.PRECIOUS: exports/nhdarea.geojson.gz
+
+exports/nhdarea.geojson.gz:
+	mkdir -p $$(dirname $@)
+	ogr2ogr /vsistdout/ \
+		-f GeoJSONSeq \
+		-lco ID_FIELD=nhdplusid \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		nhdarea | pv -lcN $@ | pigz > $@
+
+.PRECIOUS: exports/nhdarea.mbtiles
+
+exports/nhdarea.mbtiles: exports/nhdarea.geojson.gz
+	tippecanoe \
+		-f \
+		-P \
+		-o $@ \
+		-l nhdarea \
+		-n "NHDArea" \
+		-Z 12 \
+		-z 13 \
+		$<
+
+.PRECIOUS: exports/nhdflowline.geojson.gz
+
+exports/nhdflowline.geojson.gz:
+	mkdir -p $$(dirname $@)
+	ogr2ogr /vsistdout/ \
+		-f GeoJSONSeq \
+		-lco ID_FIELD=nhdplusid \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-where "fcode NOT IN (46003)" \
+		nhdflowline | pv -lcN $@ | pigz > $@
+
+.PRECIOUS: exports/nhdflowline.mbtiles
+
+exports/nhdflowline.mbtiles: exports/nhdflowline.geojson.gz
+	tippecanoe \
+		-f \
+		-P \
+		-o $@ \
+		-l nhdflowline \
+		-n "NHDFlowline" \
+		-Z 12 \
+		-z 13 \
+		$<
+
+.PRECIOUS: exports/nhdpolygon.geojson.gz
+
+exports/nhdpolygon.geojson.gz:
+	mkdir -p $$(dirname $@)
+	ogr2ogr /vsistdout/ \
+		-f GeoJSONSeq \
+		-lco ID_FIELD=nhdplusid \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		nhdpolygon | pv -lcN $@ | pigz > $@
+
+.PRECIOUS: exports/nhdarea.mbtiles
+
+exports/nhdpolygon.mbtiles: exports/nhdpolygon.geojson.gz
+	tippecanoe \
+		-f \
+		-P \
+		-o $@ \
+		-l nhdpolygon \
+		-n "NHDArea + NHDWaterbody" \
+		-Z 12 \
+		-z 13 \
+		$<
+.PRECIOUS: exports/nhdwaterbody.geojson.gz
+
+exports/nhdwaterbody.geojson.gz:
+	mkdir -p $$(dirname $@)
+	ogr2ogr /vsistdout/ \
+		-f GeoJSONSeq \
+		-lco ID_FIELD=nhdplusid \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		nhdwaterbody | pv -lcN $@ | pigz > $@
+
+.PRECIOUS: exports/nhdwaterbody.mbtiles
+
+exports/nhdwaterbody.mbtiles: exports/nhdwaterbody.geojson.gz
+	tippecanoe \
+		-f \
+		-P \
+		-o $@ \
+		-l nhdwaterbody \
+		-n "NHDWaterbody" \
+		-Z 12 \
+		-z 13 \
+		$<
+
 exports/rapids.geojson:
 	mkdir -p $$(dirname $@)
 	ogr2ogr $@ \
