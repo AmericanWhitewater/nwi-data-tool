@@ -11,7 +11,7 @@ INSERT INTO reach_segments
       t.flowline_point takeout_flowline_point,
       t.geom takeout_geom,
       -- default to 400km
-      COALESCE(r.length * 1609.34, 40000) length,
+      COALESCE(NULLIF(r.length, 0) * 1609.34, 40000) length,
       r.ploc original_putin_geom,
       r.tloc original_takeout_geom
     FROM snapped_putins p
