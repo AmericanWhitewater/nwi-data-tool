@@ -3,6 +3,14 @@ include init.mk
 
 default: db/all
 
+all: nhdplus-v2 nhdplus-hr nhdplus-ak
+
+nhdplus-ak: wbd/ak/19020401 wbd/ak/19020402 wbd/ak/19020501 wbd/ak/19020502 wbd/ak/19020503 wbd/ak/19020504 wbd/ak/19020505
+
+nhdplus-hr: wbd/0101 wbd/0102 wbd/0103 wbd/0104 wbd/0105 wbd/0106 wbd/0107 wbd/0108 wbd/0109 wbd/0110 wbd/0202 wbd/0203 wbd/0204 wbd/0205 wbd/0206 wbd/0207 wbd/0208 wbd/0301 wbd/0302 wbd/0303 wbd/0304 wbd/0305 wbd/0306 wbd/0307 wbd/0310 wbd/0311 wbd/0313 wbd/0315 wbd/0316 wbd/0317 wbd/0415 wbd/0501 wbd/0502 wbd/0503 wbd/0504 wbd/0505 wbd/0506 wbd/0507 wbd/0508 wbd/0509 wbd/0510 wbd/0511 wbd/0512 wbd/0513 wbd/0514 wbd/0601 wbd/0602 wbd/0603 wbd/0604 wbd/0701 wbd/0702 wbd/0703 wbd/0704 wbd/0705 wbd/0706 wbd/0707 wbd/0708 wbd/0709 wbd/0710 wbd/0711 wbd/0712 wbd/0713 wbd/0714 wbd/0902 wbd/0903 wbd/1002 wbd/1003 wbd/1004 wbd/1007 wbd/1008 wbd/1009 wbd/1012 wbd/1015 wbd/1017 wbd/1018 wbd/1019 wbd/1021 wbd/1024 wbd/1027 wbd/1030 wbd/1101 wbd/1102 wbd/1105 wbd/1106 wbd/1107 wbd/1108 wbd/1109 wbd/1111 wbd/1113 wbd/1114 wbd/1201 wbd/1202 wbd/1203 wbd/1205 wbd/1206 wbd/1207 wbd/1209 wbd/1210 wbd/1211 wbd/1301 wbd/1302 wbd/1304 wbd/1306 wbd/1307 wbd/1401 wbd/1402 wbd/1403 wbd/1404 wbd/1405 wbd/1406 wbd/1407 wbd/1408 wbd/1501 wbd/1502 wbd/1503 wbd/1504 wbd/1505 wbd/1506 wbd/1601 wbd/1602 wbd/1603 wbd/1605 wbd/1701 wbd/1702 wbd/1703 wbd/1704 wbd/1705 wbd/1706 wbd/1707 wbd/1708 wbd/1709 wbd/1710 wbd/1711 wbd/1712 wbd/1801 wbd/1806 wbd/1808 wbd/1809
+
+nhdplus-v2: wbd/04 wbd/1802 wbd/1803 wbd/1804 wbd/1805 wbd/1807 wbd/2001 wbd/2002 wbd/2007 wbd/2101
+
 # these targets don't produce files; always run them
 .PHONY: DATABASE_URL db db/postgis db/all db/nhdfcode db/nhdarea_% \
 				db/nhdflowline_% db/nhdplusflowlinevaa_% db/nhdwaterbody_% db/wbdhu4 \
