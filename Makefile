@@ -878,7 +878,7 @@ exports/reach_segments.%.geojson: db/descriptive_reach_segments
 # process a specific 8-digit hydrologic unit (for Alaska)
 wbd/ak/%: db/ak/snapped_putins.% db/ak/snapped_takeouts.%
 	$(eval hu8 := $*)
-	@$(MAKE) db/correct_putins
+	@$(MAKE) db/correct_putins.$(hu8)
 	@$(MAKE) db/ak/reach_segments.$(hu8)
 	@echo "Reaches for hydrologic unit $(hu8) processed."
 	@mkdir -p $$(dirname $@)
@@ -887,7 +887,7 @@ wbd/ak/%: db/ak/snapped_putins.% db/ak/snapped_takeouts.%
 # process a specific 4-digit hydrologic unit
 wbd/%: db/snapped_putins.% db/snapped_takeouts.%
 	$(eval hu4 := $*)
-	@$(MAKE) db/correct_putins
+	@$(MAKE) db/correct_putins.$(hu4)
 	@$(MAKE) db/reach_segments.$(hu4)
 	@echo "Reaches for hydrologic unit $(hu4) processed."
 	@mkdir -p $$(dirname $@)
