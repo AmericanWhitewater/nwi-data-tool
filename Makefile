@@ -857,6 +857,14 @@ exports/reach_segments.mbtiles: exports/reach_segments.geojson
 		-z 13 \
 		$<
 
+exports/reach_segments/reach_segments.shp: db/descriptive_reach_segments
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-where "geom IS NOT NULL AND GeometryType(geom) != 'POINT'" \
+		$(notdir $<)
+
 exports/reach_segments.%.geojson: db/descriptive_reach_segments
 	$(eval hu4 := $*)
 	mkdir -p $$(dirname $@)
