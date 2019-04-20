@@ -17,7 +17,7 @@ candidates AS (
     geom::geography,
     ST_Transform(pt, ST_SRID(geom))::geography,
     2500)
-  WHERE fcode NOT IN (33600, 33601, 33602, 46003, 46007)
+  WHERE fcode NOT IN (33600, 33601, 33602, 46007)
 ),
 candidate_lines as (
   SELECT
