@@ -860,8 +860,7 @@ exports/nhdflowline.geojson.gz:
 		-lco ID_FIELD=nhdplusid \
 		-mapFieldType DateTime=String \
 		"PG:${DATABASE_URL}" \
-		-where "fcode NOT IN (46003)" \
-		nhdflowline | pv -lcN $@ | pigz > $@
+		nhd.nhdflowline | pv -lcN $@ | pigz > $@ || rm -f $@
 
 .PRECIOUS: exports/nhdflowline.mbtiles
 
@@ -885,7 +884,7 @@ exports/nhdpolygon.geojson.gz:
 		-lco ID_FIELD=nhdplusid \
 		-mapFieldType DateTime=String \
 		"PG:${DATABASE_URL}" \
-		nhdpolygon | pv -lcN $@ | pigz > $@
+		nhd.nhdpolygon | pv -lcN $@ | pigz > $@ || rm -f $@
 
 .PRECIOUS: exports/nhdarea.mbtiles
 
