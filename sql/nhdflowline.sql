@@ -127,6 +127,8 @@ CREATE VIEW nhd.nhdflowline AS
   UNION ALL
     SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0714
   UNION ALL
+    SELECT comid AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_08
+  UNION ALL
     SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0902
   UNION ALL
     SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0903

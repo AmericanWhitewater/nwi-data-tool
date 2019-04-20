@@ -511,6 +511,14 @@ SELECT nhdplusid, geom,
        visibilityfilter
 FROM nhdwaterbody_0714
 UNION ALL
+SELECT comid AS nhdplusid, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       0 AS visibilityfilter
+FROM nhdwaterbody_08
+UNION ALL
 SELECT nhdplusid, geom,
        fdate,
        gnis_name,

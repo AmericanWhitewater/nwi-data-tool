@@ -127,6 +127,8 @@ CREATE VIEW nhd.nhdarea AS
   UNION ALL
     SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0714
   UNION ALL
+    SELECT comid AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_08
+  UNION ALL
     SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0902
   UNION ALL
     SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0903

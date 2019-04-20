@@ -9,7 +9,7 @@ nhdplus-ak: wbd/ak/19020401 wbd/ak/19020402 wbd/ak/19020501 wbd/ak/19020502 wbd/
 
 nhdplus-hr: wbd/0101 wbd/0102 wbd/0103 wbd/0104 wbd/0105 wbd/0106 wbd/0107 wbd/0108 wbd/0109 wbd/0110 wbd/0202 wbd/0203 wbd/0204 wbd/0205 wbd/0206 wbd/0207 wbd/0208 wbd/0301 wbd/0302 wbd/0303 wbd/0304 wbd/0305 wbd/0306 wbd/0307 wbd/0310 wbd/0311 wbd/0313 wbd/0315 wbd/0316 wbd/0317 wbd/0415 wbd/0501 wbd/0502 wbd/0503 wbd/0504 wbd/0505 wbd/0506 wbd/0507 wbd/0508 wbd/0509 wbd/0510 wbd/0511 wbd/0512 wbd/0513 wbd/0514 wbd/0601 wbd/0602 wbd/0603 wbd/0604 wbd/0701 wbd/0702 wbd/0703 wbd/0704 wbd/0705 wbd/0706 wbd/0707 wbd/0708 wbd/0709 wbd/0710 wbd/0711 wbd/0712 wbd/0713 wbd/0714 wbd/0902 wbd/0903 wbd/1002 wbd/1003 wbd/1004 wbd/1007 wbd/1008 wbd/1009 wbd/1012 wbd/1015 wbd/1017 wbd/1018 wbd/1019 wbd/1021 wbd/1024 wbd/1027 wbd/1030 wbd/1101 wbd/1102 wbd/1105 wbd/1106 wbd/1107 wbd/1108 wbd/1109 wbd/1111 wbd/1113 wbd/1114 wbd/1201 wbd/1202 wbd/1203 wbd/1205 wbd/1206 wbd/1207 wbd/1209 wbd/1210 wbd/1211 wbd/1301 wbd/1302 wbd/1304 wbd/1306 wbd/1307 wbd/1401 wbd/1402 wbd/1403 wbd/1404 wbd/1405 wbd/1406 wbd/1407 wbd/1408 wbd/1501 wbd/1502 wbd/1503 wbd/1504 wbd/1505 wbd/1506 wbd/1601 wbd/1602 wbd/1603 wbd/1605 wbd/1701 wbd/1702 wbd/1703 wbd/1704 wbd/1705 wbd/1706 wbd/1707 wbd/1708 wbd/1709 wbd/1710 wbd/1711 wbd/1712 wbd/1801 wbd/1806 wbd/1808 wbd/1809
 
-nhdplus-v2: wbd/04 wbd/1802 wbd/1803 wbd/1804 wbd/1805 wbd/1807 wbd/2001 wbd/2002 wbd/2007 wbd/2101
+nhdplus-v2: wbd/04 wbd/0802 wbd/0804 wbd/1802 wbd/1803 wbd/1804 wbd/1805 wbd/1807 wbd/2001 wbd/2002 wbd/2007 wbd/2101
 
 # these targets don't produce files; always run them
 .PHONY: DATABASE_URL db db/postgis db/all db/nhdfcode db/nhdarea_% \
@@ -51,6 +51,33 @@ db/nhdarea_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDArea.shp db/p
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
 	  HU4=04 HU2=04_real envsubst < sql/nhdarea_hu4.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1)
+
+db/nhdarea_08: data/NHDPlusMS/NHDPlus08/NHDSnapshot/Hydrography/NHDArea.shp db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-dim XY \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
+		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
+		-f PGDump \
+		-skipfailures \
+		-where "fcode NOT IN (31800, 33600, 33601, 33603, 34300, 34305, 34306, 36400, 40300, 40307, 40308, 40309, 44500, 46003, 46007, 46100, 48400, 48500, 56800)" \
+		/vsistdout/ \
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX
+
+db/nhdarea_0802 \
+db/nhdarea_0804: sql/nhdarea_hu4.sql db/nhdarea_08
+	$(eval relation := $(notdir $@))
+	$(eval hu4 := $(subst nhdarea_,,$(notdir $@)))
+	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -qX1
 
 db/nhdarea_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp db/postgis
 	$(eval relation := $(notdir $@))
@@ -190,6 +217,33 @@ db/nhdflowline_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDFlowline.
 	  HU4=04 HU2=04_real envsubst < sql/nhdflowline_hu4.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1)
 
+db/nhdflowline_08: data/NHDPlusMS/NHDPlus08/NHDSnapshot/Hydrography/NHDFlowline.shp db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-dim XY \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
+		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
+		-f PGDump \
+		/vsistdout/ \
+		-skipfailures \
+		-where "fcode NOT IN (33600, 33601, 33603, 42000, 42001, 42002, 42003, 42800, 42801, 42802, 42803, 42804, 42805, 42806, 42807, 42808, 42809, 42810, 42811, 42812, 42813, 42814, 42815, 42816, 46007)" \
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX
+
+db/nhdflowline_0802 \
+db/nhdflowline_0804: sql/nhdflowline_hu4.sql db/nhdflowline_08
+	$(eval relation := $(notdir $@))
+	$(eval hu4 := $(subst nhdflowline_,,$(notdir $@)))
+	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -qX1
+
 db/nhdflowline_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.shp db/postgis
 	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
@@ -310,6 +364,29 @@ db/nhdplusflowlinevaa_04: data/NHDPlusGL/NHDPlus04/NHDPlusAttributes/PlusFlowlin
 	  HU4=04 HU2=04_real envsubst < sql/nhdplusflowlinevaa_hu4.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1)
 
+db/nhdplusflowlinevaa_08: data/NHDPlusMS/NHDPlus08/NHDPlusAttributes/PlusFlowlineVAA.dbf db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-nln $(relation) \
+		-lco PRECISION=NO \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
+		-f PGDump \
+		/vsistdout/ \
+		$< \
+		plusflowlinevaa | pv | psql -v ON_ERROR_STOP=1 -qX
+
+db/nhdplusflowlinevaa_0802 \
+db/nhdplusflowlinevaa_0804: sql/nhdplusflowlinevaa_hu4.sql db/nhdplusflowlinevaa_08
+	$(eval relation := $(notdir $@))
+	$(eval hu4 := $(subst nhdplusflowlinevaa_,,$(notdir $@)))
+	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -qX1
+
 db/nhdplusflowlinevaa_18: data/NHDPlusCA/NHDPlus18/NHDPlusAttributes/PlusFlowlineVAA.dbf db/postgis
 	$(eval relation := $(notdir $@))
 	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
@@ -415,6 +492,33 @@ db/nhdwaterbody_04: data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDWaterbod
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
 	  HU4=04 HU2=04_real envsubst < sql/nhdwaterbody_hu4.sql | \
 	  psql -v ON_ERROR_STOP=1 -qX1)
+
+db/nhdwaterbody_08: data/NHDPlusMS/NHDPlus08/NHDSnapshot/Hydrography/NHDWaterbody.shp db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-dim XY \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-lco SCHEMA=nhd \
+		-lco CREATE_SCHEMA=OFF \
+		-nln $(relation) \
+		-nlt CONVERT_TO_LINEAR \
+		-f PGDump \
+		/vsistdout/ \
+		-skipfailures \
+		-where "fcode NOT IN (36100, 37800, 39001, 39005, 39006, 39011, 39012, 43601, 43603, 43604, 43605, 43606, 43608, 43609, 43610, 43611, 43612, 43624, 43625, 43626, 46600, 46601, 46602, 49300)" \
+		$< | pv | psql -v ON_ERROR_STOP=1 -qX
+
+db/nhdwaterbody_0802 \
+db/nhdwaterbody_0804: sql/nhdwaterbody_hu4.sql db/nhdwaterbody_08
+	$(eval relation := $(notdir $@))
+	$(eval hu4 := $(subst nhdwaterbody_,,$(notdir $@)))
+	$(eval hu2 := $(shell cut -c 1-2 <<< $(hu4)))
+	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu4)" > /dev/null 2>&1 || \
+	  HU4=$(hu4) HU2=$(hu2) envsubst < $< | \
+	  psql -v ON_ERROR_STOP=1 -qX1
 
 db/nhdwaterbody_18: data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDWaterbody.shp db/postgis
 	$(eval relation := $(notdir $@))
@@ -953,6 +1057,11 @@ data/WBD_National_GDB.zip:
 data/NHDPlusV21_GL_04_NHDPlusAttributes_14.7z:
 	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusGL/NHDPlusV21_GL_04_NHDPlusAttributes_14.7z)
 
+.PRECIOUS: data/NHDPlusV21_MS_08_NHDPlusAttributes_09.7z
+
+data/NHDPlusV21_MS_08_NHDPlusAttributes_09.7z:
+	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusMS/NHDPlus08/NHDPlusV21_MS_08_NHDPlusAttributes_09.7z)
+
 .PRECIOUS: data/NHDPlusV21_CA_18_NHDPlusAttributes_08.7z
 
 data/NHDPlusV21_CA_18_NHDPlusAttributes_08.7z:
@@ -973,6 +1082,11 @@ data/NHDPlusV21_CI_21_NHDPlusAttributes_02.7z:
 data/NHDPlusV21_GL_04_NHDSnapshot_08.7z:
 	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusGL/NHDPlusV21_GL_04_NHDSnapshot_08.7z)
 
+.PRECIOUS: data/NHDPlusV21_MS_08_NHDSnapshot_07.7z
+
+data/NHDPlusV21_MS_08_NHDSnapshot_07.7z:
+	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusMS/NHDPlus08/NHDPlusV21_MS_08_NHDSnapshot_07.7z)
+
 .PRECIOUS: data/NHDPlusV21_CA_18_NHDSnapshot_05.7z
 
 data/NHDPlusV21_CA_18_NHDSnapshot_05.7z:
@@ -989,6 +1103,10 @@ data/NHDPlusV21_CI_21_NHDSnapshot_02.7z:
 	$(call download,http://www.horizon-systems.com/NHDPlusData/NHDPlusV21/Data/NHDPlusCI/NHDPlusV21_CI_21_NHDSnapshot_02.7z)
 
 data/NHDPlusGL/NHDPlus04/NHDPlusAttributes/PlusFlowlineVAA.dbf: data/NHDPlusV21_GL_04_NHDPlusAttributes_14.7z
+	7z x -odata/ -y $<
+	@touch $@
+
+data/NHDPlusMS/NHDPlus08/NHDPlusAttributes/PlusFlowlineVAA.dbf: data/NHDPlusV21_MS_08_NHDPlusAttributes_09.7z
 	7z x -odata/ -y $<
 	@touch $@
 
@@ -1009,6 +1127,12 @@ data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDFlowline.shp \
 data/NHDPlusGL/NHDPlus04/NHDSnapshot/Hydrography/NHDWaterbody.shp: data/NHDPlusV21_GL_04_NHDSnapshot_08.7z
 	7z x -odata/ -y $<
 	find data/NHDPlusGL/NHDPlus04/NHDSnapshot -exec touch {} \;
+
+data/NHDPlusMS/NHDPlus08/NHDSnapshot/Hydrography/NHDArea.shp \
+data/NHDPlusMS/NHDPlus08/NHDSnapshot/Hydrography/NHDFlowline.shp \
+data/NHDPlusMS/NHDPlus08/NHDSnapshot/Hydrography/NHDWaterbody.shp: data/NHDPlusV21_MS_08_NHDSnapshot_07.7z
+	7z x -odata/ -y $<
+	find data/NHDPlusMS/NHDPlus08/NHDSnapshot -exec touch {} \;
 
 data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDArea.shp \
 data/NHDPlusCA/NHDPlus18/NHDSnapshot/Hydrography/NHDFlowline.shp \
