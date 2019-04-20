@@ -801,6 +801,7 @@ exports/access.mbtiles: exports/access.geojson
 		-n "Corrected access points" \
 		-Z 5 \
 		-z 13 \
+		-r1 \
 		$<
 
 exports/access.%.geojson: db/access
@@ -939,6 +940,7 @@ exports/rapids.mbtiles: exports/rapids.geojson
 		-n "Raw rapid data" \
 		-Z 5 \
 		-z 13 \
+		-r1 \
 		$<
 
 exports/reach_segments.geojson: db/descriptive_reach_segments
