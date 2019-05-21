@@ -941,6 +941,26 @@ exports/reach_segments.mbtiles: exports/reach_segments.geojson
 		-z 13 \
 		$<
 
+exports/reach-segment-labels.geojson: db/descriptive_reach_segments
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-lco RFC7946=YES \
+		-sql "SELECT reach_id, river, section, NULLIF(altname, '') altname, huc4, replace(class::text, '(', ' (') \"class\", ST_PointOnSurface(geom) geom FROM descriptive_reach_segments WHERE geom IS NOT NULL ORDER BY ST_Length(geom) DESC"
+
+exports/reach-segment-labels.mbtiles: exports/reach-segment-labels.geojson
+	tippecanoe \
+		-f \
+		-o $@ \
+		--use-attribute-for-id reach_id \
+		-l reach_segment-labels \
+		-n "Reach segment centerpoints" \
+		-Z 5 \
+		-z 13 \
+		-r1 \
+		$<
+
 exports/reach_segments/reach_segments.shp: db/descriptive_reach_segments
 	mkdir -p $$(dirname $@)
 	ogr2ogr $@ \
