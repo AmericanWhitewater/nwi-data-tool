@@ -16,4 +16,5 @@ CREATE TABLE tmp.reaches_${HU4} AS
     OR ST_Contains(geom, ST_Transform(tloc, ST_SRID(geom))))
   WHERE huc4 = '${HU4}'
     -- current revision
-    AND is_final;
+    AND is_final
+    AND status != 'd';
