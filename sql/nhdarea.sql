@@ -1,303 +1,303 @@
 CREATE VIEW nhd.nhdarea AS
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0101
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0101
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0102
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0102
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0103
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0103
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0104
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0104
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0105
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0105
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0106
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0106
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0107
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0107
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0108
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0108
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0109
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0109
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0110
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0110
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0202
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0202
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0203
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0203
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0204
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0204
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0205
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0205
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0206
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0206
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0207
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0207
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0208
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0208
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0301
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0301
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0302
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0302
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0303
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0303
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0304
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0304
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0305
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0305
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0306
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0306
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0307
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0307
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0310
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0310
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0311
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0311
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0313
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0313
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0315
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0315
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0316
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0316
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0317
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0317
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_04
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_04
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0415
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0415
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0501
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0501
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0502
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0502
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0503
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0503
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0504
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0504
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0505
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0505
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0506
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0506
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0507
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0507
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0508
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0508
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0509
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0509
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0510
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0510
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0511
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0511
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0512
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0512
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0513
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0513
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0514
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0514
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0601
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0601
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0602
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0602
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0603
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0603
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0604
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0604
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0701
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0701
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0702
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0702
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0703
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0703
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0704
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0704
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0705
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0705
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0706
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0706
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0707
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0707
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0708
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0708
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0709
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0709
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0710
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0710
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0711
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0711
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0712
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0712
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0713
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0713
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0714
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0714
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_08
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_08
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0902
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0902
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0903
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0903
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1002
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1002
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1003
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1003
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1004
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1004
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1007
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1007
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1008
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1008
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1009
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1009
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1012
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1012
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1015
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1015
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1017
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1017
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1018
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1018
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1019
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1019
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1021
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1021
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1024
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1024
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1027
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1027
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1030
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1030
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1101
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1101
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1102
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1102
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1105
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1105
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1106
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1106
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1107
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1107
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1108
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1108
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1109
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1109
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1111
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1111
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1113
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1113
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1114
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1114
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1201
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1201
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1202
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1202
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1203
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1203
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1205
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1205
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1206
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1206
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1207
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1207
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1209
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1209
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1210
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1210
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1211
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1211
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1301
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1301
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1302
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1302
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1304
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1304
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1306
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1306
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1307
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1307
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1401
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1401
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1402
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1402
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1403
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1403
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1404
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1404
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1405
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1405
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1406
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1406
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1407
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1407
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1408
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1408
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1501
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1501
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1502
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1502
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1503
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1503
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1504
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1504
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1505
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1505
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1506
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1506
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1601
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1601
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1602
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1602
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1603
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1603
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1605
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1605
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1701
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1701
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1702
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1702
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1703
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1703
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1704
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1704
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1705
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1705
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1706
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1706
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1707
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1707
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1708
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1708
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1709
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1709
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1710
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1710
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1711
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1711
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1712
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1712
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_18
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_18
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1801
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1801
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1806
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1806
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1807
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1807
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1808
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1808
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1809
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1809
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020401
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020401
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020402
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020402
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020501
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020501
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020502
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020502
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020503
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020503
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020504
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020504
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020505
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020505
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_20
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_20
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_21
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_21
 ;

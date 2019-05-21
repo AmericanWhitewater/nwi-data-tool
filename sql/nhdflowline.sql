@@ -1,303 +1,303 @@
 CREATE VIEW nhd.nhdflowline AS
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0101
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0101
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0102
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0102
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0103
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0103
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0104
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0104
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0105
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0105
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0106
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0106
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0107
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0107
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0108
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0108
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0109
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0109
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0110
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0110
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0202
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0202
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0203
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0203
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0204
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0204
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0205
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0205
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0206
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0206
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0207
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0207
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0208
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0208
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0301
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0301
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0302
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0302
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0303
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0303
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0304
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0304
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0305
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0305
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0306
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0306
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0307
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0307
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0310
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0310
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0311
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0311
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0313
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0313
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0315
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0315
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0316
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0316
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0317
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0317
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_04
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_04
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0415
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0415
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0501
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0501
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0502
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0502
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0503
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0503
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0504
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0504
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0505
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0505
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0506
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0506
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0507
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0507
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0508
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0508
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0509
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0509
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0510
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0510
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0511
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0511
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0512
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0512
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0513
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0513
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0514
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0514
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0601
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0601
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0602
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0602
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0603
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0603
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0604
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0604
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0701
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0701
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0702
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0702
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0703
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0703
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0704
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0704
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0705
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0705
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0706
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0706
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0707
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0707
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0708
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0708
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0709
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0709
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0710
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0710
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0711
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0711
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0712
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0712
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0713
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0713
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0714
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0714
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_08
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_08
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0902
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0902
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0903
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_0903
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1002
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1002
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1003
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1003
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1004
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1004
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1007
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1007
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1008
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1008
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1009
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1009
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1012
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1012
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1015
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1015
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1017
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1017
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1018
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1018
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1019
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1019
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1021
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1021
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1024
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1024
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1027
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1027
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1030
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1030
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1101
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1101
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1102
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1102
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1105
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1105
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1106
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1106
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1107
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1107
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1108
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1108
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1109
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1109
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1111
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1111
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1113
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1113
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1114
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1114
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1201
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1201
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1202
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1202
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1203
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1203
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1205
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1205
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1206
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1206
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1207
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1207
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1209
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1209
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1210
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1210
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1211
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1211
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1301
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1301
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1302
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1302
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1304
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1304
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1306
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1306
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1307
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1307
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1401
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1401
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1402
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1402
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1403
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1403
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1404
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1404
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1405
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1405
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1406
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1406
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1407
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1407
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1408
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1408
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1501
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1501
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1502
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1502
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1503
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1503
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1504
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1504
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1505
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1505
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1506
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1506
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1601
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1601
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1602
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1602
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1603
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1603
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1605
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1605
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1701
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1701
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1702
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1702
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1703
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1703
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1704
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1704
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1705
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1705
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1706
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1706
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1707
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1707
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1708
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1708
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1709
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1709
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1710
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1710
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1711
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1711
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1712
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1712
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_18
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_18
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1801
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1801
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1806
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1806
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1807
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1807
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1808
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1808
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1809
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_1809
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020401
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020401
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020402
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020402
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020501
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020501
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020502
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020502
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020503
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020503
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020504
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020504
   UNION ALL
-    SELECT nhdplusid, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020505
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, reachcode, fcode, visibilityfilter FROM nhdflowline_19020505
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_20
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_20
   UNION ALL
-    SELECT comid AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_21
+    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, reachcode, fcode, 0 AS visibilityfilter FROM nhdflowline_21
 ;
