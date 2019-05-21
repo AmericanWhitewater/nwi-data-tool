@@ -871,7 +871,8 @@ exports/nhdflowline.mbtiles: exports/nhdflowline.geojson.gz
 		-l nhdflowline \
 		-n "NHDFlowline" \
 		-Z 12 \
-		-z 13 \
+		-z 12 \
+		-d 13 \
 		$<
 
 .PRECIOUS: exports/nhdpolygon.geojson.gz
