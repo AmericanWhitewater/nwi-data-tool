@@ -850,19 +850,6 @@ exports/nhdarea.geojson.gz:
 		"PG:${DATABASE_URL}" \
 		nhdarea | pv -lcN $@ | pigz > $@
 
-.PRECIOUS: exports/nhdarea.mbtiles
-
-exports/nhdarea.mbtiles: exports/nhdarea.geojson.gz
-	tippecanoe \
-		-f \
-		-P \
-		-o $@ \
-		-l nhdarea \
-		-n "NHDArea" \
-		-Z 12 \
-		-z 13 \
-		$<
-
 .PRECIOUS: exports/nhdflowline.geojson.gz
 
 exports/nhdflowline.geojson.gz:
@@ -908,31 +895,10 @@ exports/nhdpolygon.mbtiles: exports/nhdpolygon.geojson.gz
 		-l nhdpolygon \
 		-n "NHDArea + NHDWaterbody" \
 		-Z 12 \
-		-z 13 \
+		-z 12 \
+		-d 13 \
 		$<
 .PRECIOUS: exports/nhdwaterbody.geojson.gz
-
-exports/nhdwaterbody.geojson.gz:
-	mkdir -p $$(dirname $@)
-	ogr2ogr /vsistdout/ \
-		-f GeoJSONSeq \
-		-lco ID_FIELD=nhdplusid \
-		-mapFieldType DateTime=String \
-		"PG:${DATABASE_URL}" \
-		nhdwaterbody | pv -lcN $@ | pigz > $@
-
-.PRECIOUS: exports/nhdwaterbody.mbtiles
-
-exports/nhdwaterbody.mbtiles: exports/nhdwaterbody.geojson.gz
-	tippecanoe \
-		-f \
-		-P \
-		-o $@ \
-		-l nhdwaterbody \
-		-n "NHDWaterbody" \
-		-Z 12 \
-		-z 13 \
-		$<
 
 exports/rapids.geojson:
 	mkdir -p $$(dirname $@)
