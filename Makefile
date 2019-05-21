@@ -21,7 +21,7 @@ DATABASE_URL:
 
 db: DATABASE_URL
 	@psql -c "SELECT 1" > /dev/null 2>&1 || \
-	(createdb && psql -c "CREATE SCHEMA nhd" && psql -c "ALTER DATABASE ${PGDATABASE} SET search_path TO public,nhd")
+	(createdb && psql -c "CREATE SCHEMA nhd" && psql -c "CREATE SCHEMA tmp" && psql -c "ALTER DATABASE ${PGDATABASE} SET search_path TO public,nhd,tmp")
 
 db/postgis: db
 	$(call create_extension)

@@ -1,4 +1,4 @@
-CREATE TABLE reaches_${HU8} AS
+CREATE TABLE tmp.reaches_${HU8} AS
   SELECT
     id,
     revision,

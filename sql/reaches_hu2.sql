@@ -1,4 +1,4 @@
-CREATE TABLE reaches_${HU2} AS
+CREATE TABLE tmp.reaches_${HU2} AS
   SELECT DISTINCT
     id,
     revision,
