@@ -814,14 +814,26 @@ exports/access.%.geojson: db/access
 		-where "huc4 = '$(hu4)' AND geom IS NOT NULL" \
 		$(notdir $<)
 
-exports/gages.geojson:
+exports/gages.geojson.gz:
 	mkdir -p $$(dirname $@)
 	ogr2ogr $@ \
+		-f GeoJSONSeq \
 		-mapFieldType DateTime=String,Time=String \
 		"PG:${DATABASE_URL}" \
-		-lco RFC7946=YES \
+		-lco ID_FIELD=id \
 		-select "source, id, name, update_frequency" \
 		gages
+
+exports/gages.mbtiles: exports/gages.geojson.gz
+	tippecanoe \
+		-f \
+		-o $@ \
+		-l gages \
+		-n "Gage locations" \
+		-Z 5 \
+		-z 13 \
+		-r1 \
+		$<
 
 exports/nhd.mbtiles: exports/nhdflowline.mbtiles exports/nhdpolygon.mbtiles
 	mkdir -p $$(dirname $@)
