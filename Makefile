@@ -794,6 +794,14 @@ db/descriptive_reach_segments: db/reach_segments
 db/flowline: db/postgis
 	$(call create_relation)
 
+exports/access/access.shp: db/access
+	mkdir -p $$(dirname $@)
+	ogr2ogr $@ \
+		-mapFieldType DateTime=String \
+		"PG:${DATABASE_URL}" \
+		-where "geom IS NOT NULL" \
+		$(notdir $<)
+
 exports/access.geojson: db/access
 	mkdir -p $$(dirname $@)
 	ogr2ogr $@ \
