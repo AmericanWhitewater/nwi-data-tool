@@ -13,7 +13,7 @@ nhdplus-v2: wbd/04 wbd/0802 wbd/0804 wbd/1802 wbd/1803 wbd/1804 wbd/1805 wbd/180
 
 # these targets don't produce files; always run them
 .PHONY: DATABASE_URL db db/postgis db/all db/nhdfcode db/nhdarea_% \
-				db/nhdflowline_% db/nhdplusflowlinevaa_% db/nhdwaterbody_% db/wbdhu4 \
+				db/nhdflowline_% db/nhdplusflowlinevaa_% db/nhdwaterbody_% db/wbdhu2 db/wbdhu4 db/wbdhu8 \
 				db/reaches_% db/snapped_putins_% db/snapped_takeouts_%
 
 DATABASE_URL:
@@ -25,8 +25,6 @@ db: DATABASE_URL
 
 db/postgis: db
 	$(call create_extension)
-
-db/all: db/wbdhu4
 
 # NHD water body polygons (rivers)
 
@@ -621,6 +619,19 @@ db/nhdwaterbody_%: data/NHDPLUS_H_%_HU4_GDB.zip db/postgis
 		$< \
 		nhdwaterbody | pv | psql -v ON_ERROR_STOP=1 -qX
 
+# watershed boundaries for 2-digit hydrologic units
+db/wbdhu2: data/WBD_National_GDB.zip db/postgis
+	$(eval relation := $(notdir $@))
+	@psql -c "\d $(relation)" > /dev/null 2>&1 || \
+	ogr2ogr \
+		--config PG_USE_COPY YES \
+		-lco GEOMETRY_NAME=geom \
+		-lco POSTGIS_VERSION=2.2 \
+		-f PGDump \
+		/vsistdout/ \
+		$< \
+		$(relation) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
+
 # watershed boundaries for 4-digit hydrologic units
 db/wbdhu4: data/WBD_National_GDB.zip db/postgis
 	$(eval relation := $(notdir $@))
@@ -648,7 +659,7 @@ db/wbdhu8: data/WBD_National_GDB.zip db/postgis
 		$< \
 		$(relation) 2> /dev/null | pv | psql -v ON_ERROR_STOP=1 -qX
 
-db/reaches.04: sql/reaches_hu2.sql db/wbdhu4
+db/reaches.04: sql/reaches_hu2.sql db/wbdhu2
 	$(eval hu2 := 04)
 	$(eval relation := $(notdir $(basename $@)))
 	@psql -v ON_ERROR_STOP=1 -qXc "\d $(relation)_$(hu2)" > /dev/null 2>&1 || \
