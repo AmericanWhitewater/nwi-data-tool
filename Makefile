@@ -946,8 +946,7 @@ exports/reach_segments.geojson: db/descriptive_reach_segments
 		-mapFieldType DateTime=String \
 		"PG:${DATABASE_URL}" \
 		-lco RFC7946=YES \
-		-where "geom IS NOT NULL" \
-		$(notdir $<)
+		-sql "SELECT reach_id, river, section, NULLIF(altname, '') altname, abstract, huc4, replace(class::text, '(', ' (') \"class\", geom FROM descriptive_reach_segments WHERE geom IS NOT NULL"
 
 exports/reach_segments.mbtiles: exports/reach_segments.geojson
 	tippecanoe \
