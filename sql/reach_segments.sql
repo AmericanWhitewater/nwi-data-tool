@@ -1,5 +1,6 @@
 CREATE TABLE reach_segments (
   reach_id integer NOT NULL,
+  revision integer NOT NULL,
   review boolean default false,
   review_reason text,
   geom geometry(Geometry, 4326),

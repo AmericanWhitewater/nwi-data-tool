@@ -1,5 +1,6 @@
 CREATE TABLE snapped_takeouts (
   reach_id integer NOT NULL,
+  revision integer NOT NULL,
   huc4 text,
   nhdplusid bigint,
   fdate timestamp WITH time zone,

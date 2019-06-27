@@ -3,6 +3,7 @@ INSERT INTO reach_segments
     -- collect various reach-related columns together
     SELECT
       p.reach_id,
+      p.revision,
       p.nhdplusid putin_nhdplusid,
       t.nhdplusid takeout_nhdplusid,
       p.flowline_point putin_flowline_point,
@@ -181,6 +182,7 @@ INSERT INTO reach_segments
   )
   SELECT
     reach_id,
+    revision,
     review
       -- put-ins or take-outs not on the generated segment are questionable
       OR NOT ST_DWithin(segments.geom, putin_flowline_point, 0.0001)
@@ -206,6 +208,7 @@ INSERT INTO reach_segments
   JOIN resnapped_takeouts USING (reach_id)
 ON CONFLICT (reach_id) DO UPDATE
   SET
+    revision = EXCLUDED.revision,
     review = EXCLUDED.review,
     review_reason = EXCLUDED.review_reason,
     geom = EXCLUDED.geom,

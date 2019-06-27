@@ -2,6 +2,7 @@ INSERT INTO snapped_putins
 WITH points AS (
   SELECT
     id reach_id,
+    revision,
     ploc pt
   FROM reaches_${HU4} reaches
 ),
@@ -68,6 +69,7 @@ snapped AS (
 )
 SELECT
   reach_id,
+  revision,
   '${HU4}' huc4,
   nhdplusid,
   fdate,
@@ -81,6 +83,7 @@ FROM snapped
 JOIN points USING (reach_id)
 ON CONFLICT (reach_id) DO UPDATE
 SET
+  revision = EXCLUDED.revision,
   huc4 = EXCLUDED.huc4,
   nhdplusid = EXCLUDED.nhdplusid,
   fdate = EXCLUDED.fdate,
