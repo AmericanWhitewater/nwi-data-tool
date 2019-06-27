@@ -734,6 +734,10 @@ db/ak/reach_segments.%: sql/actions/generate_segments.sql db/segment db/reach_se
 	HU4=$(hu4) envsubst < $< | \
 	  psql -v ON_ERROR_STOP=1 -X1
 
+# always recreate table
+db/updated_reaches: sql/updated_reaches.sql
+	psql -v ON_ERROR_STOP=1 -qX1f sql/$(subst db/,,$@).sql
+
 db/indexes/nhdarea_permanent_identifier_idx.%: sql/nhdarea_hu4_permanent_identifier_idx.sql db/nhdarea_%
 	$(eval relation := $(notdir $(basename $@)))
 	$(eval hu4 := $*)
@@ -996,6 +1000,9 @@ exports/reach_segments.%.geojson: db/descriptive_reach_segments
 		-lco RFC7946=YES \
 		-where "huc4 = '$(hu4)'" \
 		$(notdir $<)
+
+exports/updated_reaches.sql.gz: db/updated_reaches
+	pg_dump -O -t $(notdir $<) | gzip > $@
 
 # process a specific 8-digit hydrologic unit (for Alaska)
 wbd/ak/%: db/ak/snapped_putins.% db/ak/snapped_takeouts.%
