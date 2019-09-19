@@ -20,7 +20,16 @@ candidates AS (
     2500)
   WHERE fcode NOT IN (33600, 33601, 33602, 46007)
     -- don't snap to these reaches
-    AND reachcode NOT IN ('02070008000365')
+    AND reachcode NOT IN (
+      '02070008000365',
+      '02070008000367',
+      '02070008001449',
+      '02070008003328',
+      '02070008003329',
+      '02070008003338',
+      '02070008003458',
+      '02070008003488'
+    )
 ),
 candidate_lines as (
   SELECT
