@@ -21,6 +21,7 @@ candidates AS (
   WHERE fcode NOT IN (33600, 33601, 33602, 46007)
     -- don't snap to these reaches
     AND reachcode NOT IN (
+      -- C&O Canal (various Potomac River reaches)
       '02070008000365',
       '02070008000367',
       '02070008001449',
@@ -28,7 +29,9 @@ candidates AS (
       '02070008003329',
       '02070008003338',
       '02070008003458',
-      '02070008003488'
+      '02070008003488',
+      -- Swan River, https://www.americanwhitewater.org/content/River/detail/id/1028/
+      '17010211105143'
     )
 ),
 candidate_lines as (
