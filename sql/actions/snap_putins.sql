@@ -19,6 +19,8 @@ candidates AS (
     ST_Transform(pt, ST_SRID(geom))::geography,
     2500)
   WHERE fcode NOT IN (33600, 33601, 33602, 46007)
+    -- don't snap to these reaches
+    AND reachcode NOT IN ('02070008000365')
 ),
 candidate_lines as (
   SELECT
