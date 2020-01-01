@@ -521,6 +521,7 @@ exports/gages.geojson.gz:
 		"PG:${DATABASE_URL}" \
 		-lco ID_FIELD=id \
 		-select "source, id, name, update_frequency" \
+		-where "source = 'river' and loc is not null" \
 		gages
 
 exports/gages.mbtiles: exports/gages.geojson.gz
@@ -664,7 +665,7 @@ exports/reach_segments/reach_segments.shp: db/descriptive_reach_segments
 	ogr2ogr $@ \
 		-mapFieldType DateTime=String \
 		"PG:${DATABASE_URL}" \
-		-where "geom IS NOT NULL AND GeometryType(geom) != 'POINT'" \
+		-sql "SELECT reach_id, river, section, NULLIF(altname, '') altname, abstract, huc4, replace(class::text, '(', ' (') \"class\", geom FROM descriptive_reach_segments WHERE geom IS NOT NULL AND GeometryType(geom) != 'POINT'" \
 		$(notdir $<)
 
 exports/reach_segments.%.geojson: db/descriptive_reach_segments
