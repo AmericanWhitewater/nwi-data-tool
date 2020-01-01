@@ -127,7 +127,9 @@ CREATE VIEW nhd.nhdarea AS
   UNION ALL
     SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0714
   UNION ALL
-    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_08
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0802
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0804
   UNION ALL
     SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_0902
   UNION ALL
@@ -271,9 +273,15 @@ CREATE VIEW nhd.nhdarea AS
   UNION ALL
     SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1712
   UNION ALL
-    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_18
-  UNION ALL
     SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1801
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1802
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1803
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1804
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1805
   UNION ALL
     SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_1806
   UNION ALL
@@ -297,7 +305,11 @@ CREATE VIEW nhd.nhdarea AS
   UNION ALL
     SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_19020505
   UNION ALL
-    SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_20
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_2001
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_2002
+  UNION ALL
+    SELECT nhdplusid::bigint, geom, fdate, gnis_name, fcode, visibilityfilter FROM nhdarea_2007
   UNION ALL
     SELECT comid::bigint AS nhdplusid, geom, fdate, gnis_name, fcode, 0 AS visibilityfilter FROM nhdarea_21
 ;

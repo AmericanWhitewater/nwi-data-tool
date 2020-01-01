@@ -511,13 +511,21 @@ SELECT nhdplusid::bigint, geom,
        visibilityfilter
 FROM nhdwaterbody_0714
 UNION ALL
-SELECT comid::bigint AS nhdplusid, geom,
+SELECT nhdplusid::bigint, geom,
        fdate,
        gnis_name,
        reachcode,
        fcode,
-       0 AS visibilityfilter
-FROM nhdwaterbody_08
+       visibilityfilter
+FROM nhdwaterbody_0802
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_0804
 UNION ALL
 SELECT nhdplusid::bigint, geom,
        fdate,
@@ -1087,14 +1095,6 @@ SELECT nhdplusid::bigint, geom,
        visibilityfilter
 FROM nhdwaterbody_1712
 UNION ALL
-SELECT comid::bigint AS nhdplusid, geom,
-       fdate,
-       gnis_name,
-       reachcode,
-       fcode,
-       0 AS visibilityfilter
-FROM nhdwaterbody_18
-UNION ALL
 SELECT nhdplusid::bigint, geom,
        fdate,
        gnis_name,
@@ -1102,6 +1102,38 @@ SELECT nhdplusid::bigint, geom,
        fcode,
        visibilityfilter
 FROM nhdwaterbody_1801
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_1802
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_1803
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_1804
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_1805
 UNION ALL
 SELECT nhdplusid::bigint, geom,
        fdate,
@@ -1191,13 +1223,29 @@ SELECT nhdplusid::bigint, geom,
        visibilityfilter
 FROM nhdwaterbody_19020505
 UNION ALL
-SELECT comid::bigint AS nhdplusid, geom,
+SELECT nhdplusid::bigint, geom,
        fdate,
        gnis_name,
        reachcode,
        fcode,
-       0 AS visibilityfilter
-FROM nhdwaterbody_20
+       visibilityfilter
+FROM nhdwaterbody_2001
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_2002
+UNION ALL
+SELECT nhdplusid::bigint, geom,
+       fdate,
+       gnis_name,
+       reachcode,
+       fcode,
+       visibilityfilter
+FROM nhdwaterbody_2007
 UNION ALL
 SELECT comid::bigint AS nhdplusid, geom,
        fdate,
