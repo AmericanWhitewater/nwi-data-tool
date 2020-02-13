@@ -752,7 +752,7 @@ data/NHDPLUS_H_%_HU4_GDB.zip:
 .PRECIOUS: data/National_WDB_GDB.zip
 
 data/National_WBD_GDB.zip:
-	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/WBD/National/GDB/National_WBD_GDB.zip)
+	$(call download,https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/WBD/National/GDB/WBD_National_GDB.zip)
 
 .PRECIOUS: data/NHDPlusV21_GL_04_NHDPlusAttributes_14.7z
 
