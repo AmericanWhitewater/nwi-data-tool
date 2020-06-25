@@ -474,6 +474,9 @@ db/descriptive_reach_segments: db/reach_segments
 db/flowline: db/postgis
 	$(call create_relation)
 
+db/nhdflowline: db/postgis
+	$(call create_relation)
+
 exports/access/access.shp: db/access
 	mkdir -p $$(dirname $@)
 	ogr2ogr $@ \
@@ -541,7 +544,7 @@ exports/nhd.mbtiles: exports/nhdflowline.mbtiles exports/nhdpolygon.mbtiles
 
 .PRECIOUS: exports/nhdarea.geojson.gz
 
-exports/nhdarea.geojson.gz:
+exports/nhdarea.geojson.gz: db/nhdflowline
 	mkdir -p $$(dirname $@)
 	ogr2ogr /vsistdout/ \
 		-f GeoJSONSeq \
